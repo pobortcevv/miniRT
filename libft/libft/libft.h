@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 15:39:34 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/05 16:47:56 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/06 17:40:49 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_struct		ft_minus_init(t_struct flgs);
 t_struct		ft_width_init(const char *str, t_struct flgs, int i, va_list args);
 t_struct		ft_dot_star_init(const char *str, t_struct flgs, int i, va_list
 args);
+void			ft_free_mat(char **mat);
+void			ft_free_line(char *line);
 void			*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -65,6 +67,8 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(char *str1, char *str2, size_t size);
 int				ft_atoi(const char *str);
+float			ft_atof(const char *str);
+int				ft_intlen(int n);
 char			*ft_strdup(char *src);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -89,6 +93,7 @@ void   			ft_putnbr16_fd(unsigned long num, int fd, char *base);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 int				ft_lstsize(t_list *lst);
+int				ft_space(char sym);
 t_list			*ft_lstlast(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));

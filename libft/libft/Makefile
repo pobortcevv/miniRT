@@ -8,6 +8,7 @@ SRCS	=	ft_memset.c \
 		 	ft_strrchr.c \
 		 	ft_strnstr.c \
 		 	ft_atoi.c \
+			ft_atof.c \
 		 	ft_isdigit.c \
 		 	ft_memchr.c \
 		 	ft_strdup.c \
@@ -26,6 +27,7 @@ SRCS	=	ft_memset.c \
 		 	ft_substr.c \
 		 	ft_strjoin.c \
 		 	ft_strtrim.c \
+			ft_free_mat.c \
 		 	ft_split.c \
 		 	ft_itoa.c \
 		 	ft_strmapi.c \
