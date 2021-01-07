@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/06 17:49:27 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/08 00:56:43 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 # include "minirt.h"
 
-# define RESOLUTION 1
-# define AMBIANT 2
-# define CAMERA 3
-# define LIGHT 4
-# define SPHERE 5
-
 # define EMPTY_LINE 10
+# define INT 11
+# define FLOAT 12
+# define STRING 13
 
 typedef struct	s_xyx
 {

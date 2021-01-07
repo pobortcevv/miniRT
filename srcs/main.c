@@ -36,6 +36,6 @@ int	main(int ac, char **av)
 	
 
 
-	mlx_loop(rt.mlx);
+	//mlx_loop(rt.mlx);
 }
 

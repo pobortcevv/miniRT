@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 15:39:34 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/06 17:40:49 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/08 00:03:56 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ size_t			ft_strlcat(char *dest, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void			*ft_calloc(size_t nmemb, size_t size);
 int				ft_isalnum(int character);
+int				ft_inset(char *line, char *set);
 int				ft_isalpha(int character);
 int				ft_isascii(int character);
 int				ft_isprint(int character);

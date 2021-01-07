@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/01/06 13:09:17 by sabra            ###   ########.fr        #
+#    Updated: 2021/01/07 14:18:16 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,11 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 	make -C ./libft/libft
-#	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 %.o: %.c
-#	$(CC) -Wall -Wextra -Werror -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@	# macOS
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	#$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)
