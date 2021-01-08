@@ -31,7 +31,10 @@ int	main(int ac, char **av)
 		ft_printf("open fail\n");
 		return (0);
 	}
-	ft_pars(&rt);
+	if (!ft_pars(&rt))
+		ft_putstr_fd("Pars error\n", 2);
+	else
+		ft_putstr_fd("everything ok\n", 1);
 	mlx_new_window(rt.mlx, 500, 500, "hello");
 	
 

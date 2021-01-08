@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/08 00:56:43 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/08 14:40:29 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_res
 {
 	int x;
 	int y;
+	int id;
 }		t_res;
 
 typedef struct	s_cam
@@ -45,6 +46,7 @@ typedef struct	s_cam
 	t_xyz	pos;
 	t_xyz	or;
 	int	fov;
+	int	num;
 }		t_cam;
 
 typedef struct	s_sp

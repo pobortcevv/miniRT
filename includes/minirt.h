@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/07 15:31:43 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/08 14:22:33 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ typedef struct	s_rt
 
 int		ft_pars(t_rt *rt);
 void		ft_free_split(char **result, size_t last);
+int             parse_sphere(t_rt *rt);
+int             parse_camera(t_rt *rt);
+int             parse_res(t_rt *rt);
+int		dushnila_defence(char *line, int id);
 
 #endif
 
