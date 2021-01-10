@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 		ft_printf("open fail\n");
 		return (0);
 	}
-	if (!ft_pars(&rt))
+	if (ft_pars(&rt) != 1)
 		ft_putstr_fd("Pars error\n", 2);
 	else
 		ft_putstr_fd("everything ok\n", 1);

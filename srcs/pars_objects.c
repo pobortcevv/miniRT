@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/08 14:39:19 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/09 21:10:18 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		parse_sphere(t_rt *rt)
 {
 	char	**place_split;
 
-	if (ft_charcnt(rt->split[1], ',') != 2 && ft_charcnt(rt->split[3], ',') != 2)
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
@@ -43,7 +43,7 @@ int		parse_camera(t_rt *rt)
 {
 	char	**place_split;
 
-	if (ft_charcnt(rt->split[1], ',') != 2 && ft_charcnt(rt->split[2], ',') != 2)
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[2], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||

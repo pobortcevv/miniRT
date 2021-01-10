@@ -1,5 +1,4 @@
-SRCDIR	= ./
-OBJDIR	= ./
+NAME			= libft.a
 SRCS	=	ft_memset.c \
 		 	ft_bzero.c \
 		 	ft_memcpy.c \
@@ -54,6 +53,8 @@ SRCS	=	ft_memset.c \
 
 OBJS			= $(SRCS:.c=.o)
 
+.SILENT: $(NAME) compile clean fclean re
+
 BONUS			=	ft_lstnew.c \
 					ft_lstadd_front.c \
 					ft_lstsize.c \
@@ -66,16 +67,16 @@ BONUS			=	ft_lstnew.c \
 
 BONUS_OBJS		= 	$(BONUS:.c=.o)
 
-CC				= gcc
+CC				= @gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -g
 
-NAME			= libft.a
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				ar rcs $(NAME) $(OBJS)
+				echo libft compiled succesfully!
 
 compile:		$(OBJS)
 				$(CC) $(CFLAGS) $(SRCS)
@@ -83,9 +84,11 @@ compile:		$(OBJS)
 
 clean:
 				$(RM) $(OBJS) $(BONUS_OBJS)
+				echo libft .o file removed
 
 fclean:			clean
 				$(RM) $(NAME)
+				echo libft deleted :\(
 
 re:				fclean $(NAME)
 
