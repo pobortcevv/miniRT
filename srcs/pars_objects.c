@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/09 21:10:18 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/11 22:27:58 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		parse_camera(t_rt *rt)
 	rt->cam.or.y = ft_atof(place_split[1]);
 	rt->cam.or.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
-	rt->cam.fov = ft_atoi(rt->split[3]);
+	rt->cam.fov = ft_atof(rt->split[3]) * (3.14/180);
 	rt->cam.num += 1;
 	return (1);
 }

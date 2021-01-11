@@ -11,6 +11,16 @@ int	ft_check_file(char *file)
 	return (0);
 }
 
+int	start_rt(t_rt *rt)
+{
+	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "hello");
+	render(rt);
+
+
+	mlx_loop(rt->mlx);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_rt	rt;
@@ -35,10 +45,7 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Pars error\n", 2);
 	else
 		ft_putstr_fd("everything ok\n", 1);
-	mlx_new_window(rt.mlx, 500, 500, "hello");
-	
-
-
-	//mlx_loop(rt.mlx);
+	start_rt(&rt);
+	return (1);
 }
 

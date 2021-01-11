@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_dot.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:18:33 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/11 18:49:25 by sabra            ###   ########.fr       */
+/*   Created: 2021/01/11 06:42:11 by sabra             #+#    #+#             */
+/*   Updated: 2021/01/11 15:50:03 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minirt.h"
 
-size_t		ft_strlcat(char *dest, const char *src, size_t size)
+double	ft_dot(t_xyz *vec1, t_xyz *vec2)
 {
-	size_t			i;
-	size_t			end;
+	double	result;
 
-	i = 0;
-	end = ft_strlen(dest);
-	if (size <= end)
-		return (size + ft_strlen(src));
-	while (src[i] && i + end < (size - 1))
-	{
-		dest[i + end] = src[i];
-		i++;
-	}
-	dest[i + end] = '\0';
-	return (ft_strlen(src) + end);
+	result = vec1->x * vec2->x + vec1->y * vec2->y + vec1->z * vec2->z;
+	return (result);
 }

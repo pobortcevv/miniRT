@@ -29,6 +29,7 @@ SRCS	=	ft_memset.c \
 		 	ft_strtrim.c \
 			ft_charcnt.c \
 			ft_free_mat.c \
+			ft_queq.c \
 		 	ft_split.c \
 		 	ft_itoa.c \
 		 	ft_strmapi.c \
@@ -69,7 +70,7 @@ BONUS_OBJS		= 	$(BONUS:.c=.o)
 
 CC				= @gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -g
+CFLAGS			= -Wall -Wextra -Werror -g -lm
 
 
 all:			$(NAME)
