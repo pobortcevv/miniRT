@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/01/11 10:45:40 by sabra            ###   ########.fr        #
+#    Updated: 2021/01/12 20:39:27 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ INCLUDES = -I./includes
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	make -C ./libft/libft
+	make bonus -C ./libft/libft
 	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
 	echo miniRT compiled!
 	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS

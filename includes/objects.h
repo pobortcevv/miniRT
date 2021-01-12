@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/11 22:00:10 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/12 18:50:51 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "minirt.h"
 
+# define SPHERE 1
+# define PLANE 2
+# define SQUARE 3
+# define CYLINDER 4
+# define TRIANGLE 5
 # define EMPTY_LINE 10
 # define INT 11
 # define FLOAT 12
@@ -45,16 +50,21 @@ typedef struct	s_cam
 {
 	t_xyz	d;
 	t_xyz	pos;
-	t_xyz	or;
+	t_xyz	ori;
 	float	fov;
 	int	num;
 }		t_cam;
 
-typedef struct	s_sp
+typedef struct	s_elem
 {
-	t_xyz	pos;
+	int	id;
+	
+	float	side_s;
+	float	h;
 	float	r;
+	t_xyz	ori;
+	t_xyz	pos;
 	t_color	color;
-}		t_sp;
+}		t_elem;
 
 #endif

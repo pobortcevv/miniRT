@@ -13,7 +13,7 @@ int	ft_check_file(char *file)
 
 int	start_rt(t_rt *rt)
 {
-	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "hello");
+	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "minirt");
 	render(rt);
 
 

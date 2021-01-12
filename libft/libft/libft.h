@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 15:39:34 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/11 18:38:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/12 14:01:59 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				ft_s_type(t_struct flgs, va_list args);
 int				ft_p_type(t_struct flgs, va_list args);
 int				ft_di_type(t_struct flgs, va_list args, int count);
 int				ft_u_type(t_struct flgs, va_list args);
-double				ft_queq(double a, double b, double c, int id);
+float				ft_queq(float a, float b, float c, int id);
 int				ft_dwx_type(t_struct flgs, va_list args);
 int				ft_upx_type(t_struct flgs, va_list args);
 t_struct		ft_minus_init(t_struct flgs);

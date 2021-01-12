@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/11 15:50:19 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/12 21:09:27 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ typedef struct	s_rt
 
 	t_res	res;
 	t_cam	cam;
-	t_sp	sp;
-	t_color paint;
+	t_list	*ob_lst;
 	
 }		t_rt; 
 
@@ -46,11 +45,13 @@ int             parse_sphere(t_rt *rt);
 int             parse_camera(t_rt *rt);
 int             parse_res(t_rt *rt);
 int		dushnila_defence(char *line, int id);
-double		ft_dot(t_xyz *vec1, t_xyz *vec2);
+float		ft_dot(t_xyz *vec1, t_xyz *vec2);
 void		render(t_rt *rt);
-int		trace_ray(t_rt *rt, int min_t, int max_t);
+int		trace_ray(t_rt *rt, float min_t);
 int		ft_color(int r, int g, int b);
-void		intersect_sp(t_rt *rt);
+void		intersect_sp(t_rt *rt, t_elem *sp);
+void		intersect_init(t_rt *rt, t_elem *elem);
+t_elem		*ft_lstcnt(t_list *list, int index);
 void		to_viewport(int x, int y, t_rt *rt);
 
 
