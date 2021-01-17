@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/12 21:17:36 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/17 12:47:18 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	to_viewport(int x, int y, t_rt *rt)
 
 void	intersect_sp(t_rt *rt, t_elem *sp)
 {
-	t_xyz oc;
-	double k1;
-	double k2;
-	double k3;
+	t_xyz	oc;
+	float	k1;
+	float	k2;
+	float	k3;
 
 	oc.x = rt->cam.pos.x - sp->pos.x;
 	oc.y = rt->cam.pos.y - sp->pos.y;
@@ -43,6 +43,23 @@ void	intersect_sp(t_rt *rt, t_elem *sp)
 	k3 = ft_dot(&oc, &oc) - (sp->r * sp->r);
 	rt->t1 = ft_queq(k1, k2, k3, 1);
 	rt->t2 = ft_queq(k1, k2, k3, 2);
+}
+
+void	intersect_pl(t_rt *rt, t_elem *pl)
+{
+	t_xyz	oc;
+	float	k1;
+	float	k2;
+
+	oc.x = pl->pos.x - rt->cam.pos.x;
+	oc.y = pl->pos.y - rt->cam.pos.y;
+	oc.z = pl->pos.z - rt->cam.pos.z;
+	k1 = ft_dot(&(pl->ori), &oc);
+	if (!(k2 = ft_dot(&(pl->ori), &(rt->cam.d))))
+		rt->t1 = INT_MAX;
+	else
+		rt->t1 = (k1 / k2);
+	rt->t2 = INT_MAX;
 }
 
 int	ft_color(int r, int g, int b)
@@ -57,6 +74,9 @@ void	intersect_init(t_rt *rt, t_elem *elem)
 {
 	if (elem->id == SPHERE)
 		intersect_sp(rt, elem);
+	else if(elem->id == PLANE)
+		intersect_pl(rt, elem);
+
 }
 
 t_elem	*ft_lstcnt(t_list *list, int index)

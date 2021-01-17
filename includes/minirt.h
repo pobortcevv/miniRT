@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/12 21:09:27 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/16 17:05:57 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void		intersect_sp(t_rt *rt, t_elem *sp);
 void		intersect_init(t_rt *rt, t_elem *elem);
 t_elem		*ft_lstcnt(t_list *list, int index);
 void		to_viewport(int x, int y, t_rt *rt);
-
+int		parse_plane(t_rt *rt);
 
 #endif

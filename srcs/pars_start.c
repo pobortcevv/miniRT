@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/09 21:05:20 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/16 20:01:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		dushnila_defence(char *line, int id)
 	{
 		if (ft_charcnt(line, '-') > 1 || (ft_charcnt(line, '-') > 0 && line[0] != '-'))
 			return (0);
-		if (ft_charcnt(line, '.') > 1 || !(ft_isdigit(line[0])))
+		if (ft_charcnt(line, '.') > 1 || (!(ft_isdigit(line[0])) && !(line[0] == '-')))
 			return (0);
 		if (!(ft_inset(line, "-0123456789.")))
 			return (0);
@@ -65,6 +65,8 @@ int		ft_pars(t_rt *rt)
 			//parse_scene(rt, LIGHT);
 		if ((ft_memcmp(rt->split[0], "sp", ft_strlen(rt->split[0]))) == 0)
 			result = parse_sphere(rt);
+		if ((ft_memcmp(rt->split[0], "pl", ft_strlen(rt->split[0]))) == 0)
+			result = parse_plane(rt);
 		ft_free_mat(rt->split);
 		ft_free_line(rt->line);
 	}

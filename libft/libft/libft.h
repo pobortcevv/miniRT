@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 15:39:34 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/12 14:01:59 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/17 13:29:15 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(char *str1, char *str2, size_t size);
 int				ft_atoi(const char *str);
-float			ft_atof(const char *str);
+float			ft_atof(char *str);
 int				ft_intlen(int n);
 char			*ft_strdup(char *src);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);

@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:09:24 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/06 16:01:53 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/17 13:45:47 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		ft_intlen(int n)
 		n *= -1;
 		len++;
 	}
+	if (n == 0)
+		return (1);
 	while (n > 0)
 	{
 		n /= 10;
@@ -30,14 +32,14 @@ int		ft_intlen(int n)
 	return (len);
 }
 
-float	ft_atof(const char *str)
+float	ft_atof(char *str)
 {
 	int		i;
 	int		div;
 	int		atoi;
 	float	atof;
 
-	i = 0;
+	i = str[0] == '-' ? 1 : 0;
 	atoi = ft_atoi(str);
 	atof = 0;
 	div = 1;
