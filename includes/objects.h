@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/12 18:50:51 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 12:46:14 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct	s_elem
 {
 	int	id;
 	
-	float	side_s;
+	float	len;
 	float	h;
 	float	r;
 	t_xyz	ori;

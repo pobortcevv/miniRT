@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/17 12:47:18 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 12:56:21 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	to_viewport(int x, int y, t_rt *rt)
 	rt->cam.d.z = 1;
 }
 
+t_xyz	v_new(t_xyz v1, t_xyz v2)
+{
+	t_xyz	v_res;
+
+	v_res.x = v1.x - v2.x;
+	v_res.y = v1.y - v2.y;
+	v_res.z = v1.z - v2.z;
+	return (v_res);
+}
+
+t_xyz	v_multi(t_xyz v, float n)
+{
+	t_xyz	v_res;
+
+	v_res.x = v.x * n;
+	v_res.y = v.y * n;
+	v_res.z = v.z * n;
+	return (v_res);
+}
+
 void	intersect_sp(t_rt *rt, t_elem *sp)
 {
 	t_xyz	oc;
@@ -35,9 +55,7 @@ void	intersect_sp(t_rt *rt, t_elem *sp)
 	float	k2;
 	float	k3;
 
-	oc.x = rt->cam.pos.x - sp->pos.x;
-	oc.y = rt->cam.pos.y - sp->pos.y;
-	oc.z = rt->cam.pos.z - sp->pos.z;
+	oc = v_new(rt->cam.pos, sp->pos);
 	k1 = ft_dot(&(rt->cam.d), &(rt->cam.d));
 	k2 = 2 * ft_dot(&oc, &(rt->cam.d));
 	k3 = ft_dot(&oc, &oc) - (sp->r * sp->r);
@@ -47,19 +65,43 @@ void	intersect_sp(t_rt *rt, t_elem *sp)
 
 void	intersect_pl(t_rt *rt, t_elem *pl)
 {
-	t_xyz	oc;
+	t_xyz	co;
 	float	k1;
 	float	k2;
 
-	oc.x = pl->pos.x - rt->cam.pos.x;
-	oc.y = pl->pos.y - rt->cam.pos.y;
-	oc.z = pl->pos.z - rt->cam.pos.z;
-	k1 = ft_dot(&(pl->ori), &oc);
+	co = v_new(pl->pos, rt->cam.pos);
+	k1 = ft_dot(&(pl->ori), &co);
 	if (!(k2 = ft_dot(&(pl->ori), &(rt->cam.d))))
 		rt->t1 = INT_MAX;
 	else
 		rt->t1 = (k1 / k2);
 	rt->t2 = INT_MAX;
+}
+
+int	intersect_sq(t_rt *rt, t_elem *sq)
+{
+	t_xyz	co;
+	t_xyz	hit;
+	float	k1;
+	float	k2;
+
+	co = v_new(sq->pos, rt->cam.pos);
+	k1 = ft_dot(&(sq->ori), &co);
+	rt->t2 = INT_MAX;
+	if (!(k2 = ft_dot(&rt->cam.d, &sq->ori)))
+	{
+		rt->t1 = INT_MAX;
+		return (0);
+	}
+	rt->t1 = (k1 / k2);
+	hit = v_new(rt->cam.pos, v_multi(rt->cam.d, rt->t1));
+	if (fabs(hit.x - sq->pos.x) <= (sq->len / 2) &&
+			fabs(hit.y - sq->pos.y) <= (sq->len / 2) &&
+			fabs(hit.z - sq->pos.z) <= (sq->len / 2))
+		return (1);
+	else
+		rt->t1 = INT_MAX;
+	return (0);
 }
 
 int	ft_color(int r, int g, int b)
@@ -76,6 +118,8 @@ void	intersect_init(t_rt *rt, t_elem *elem)
 		intersect_sp(rt, elem);
 	else if(elem->id == PLANE)
 		intersect_pl(rt, elem);
+	else if(elem->id == SQUARE)
+		intersect_sq(rt, elem);
 
 }
 

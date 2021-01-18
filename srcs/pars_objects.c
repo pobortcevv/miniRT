@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/17 12:49:36 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 12:45:41 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int		parse_plane(t_rt *rt)
 
 	pl = ft_calloc(1, sizeof(t_elem));
 	pl->id = PLANE;
-	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2 ||
+			ft_charcnt(rt->split[2], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
@@ -78,6 +79,46 @@ if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1]
 	pl->color.r = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
 	ft_lstadd_back(&rt->ob_lst, ft_lstnew(pl));
+	return (1);
+}
+
+int		parse_square(t_rt *rt)
+{
+	char	**place_split;
+	t_elem	*sq;
+
+	sq = ft_calloc(1, sizeof(t_elem));
+	sq->id = SQUARE;
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[4], ',') != 2 ||
+			ft_charcnt(rt->split[2], ',') != 2)
+		return (0);
+	place_split = ft_split(rt->split[1], ',');
+	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT) ||
+			!dushnila_defence(rt->split[3], FLOAT))
+		return (0);
+	sq->pos.x = ft_atof(place_split[0]);
+	sq->pos.y = ft_atof(place_split[1]);
+	sq->pos.z = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	place_split = ft_split(rt->split[2], ',');
+if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT))
+		return (0);
+	sq->ori.x = ft_atof(place_split[0]);
+	sq->ori.y = ft_atof(place_split[1]);
+	sq->ori.z = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	sq->len = ft_atof(rt->split[3]);
+	place_split = ft_split(rt->split[4], ',');
+	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT))
+		return (0);
+	sq->color.b = ft_atof(place_split[0]);
+	sq->color.g = ft_atof(place_split[1]);
+	sq->color.r = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	ft_lstadd_back(&rt->ob_lst, ft_lstnew(sq));
 	return (1);
 }
 
