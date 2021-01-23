@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 12:56:21 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 20:58:23 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,6 @@ void	to_viewport(int x, int y, t_rt *rt)
 	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
 	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.y;
 	rt->cam.d.z = 1;
-}
-
-t_xyz	v_new(t_xyz v1, t_xyz v2)
-{
-	t_xyz	v_res;
-
-	v_res.x = v1.x - v2.x;
-	v_res.y = v1.y - v2.y;
-	v_res.z = v1.z - v2.z;
-	return (v_res);
-}
-
-t_xyz	v_multi(t_xyz v, float n)
-{
-	t_xyz	v_res;
-
-	v_res.x = v.x * n;
-	v_res.y = v.y * n;
-	v_res.z = v.z * n;
-	return (v_res);
 }
 
 void	intersect_sp(t_rt *rt, t_elem *sp)
@@ -70,6 +50,7 @@ void	intersect_pl(t_rt *rt, t_elem *pl)
 	float	k2;
 
 	co = v_new(pl->pos, rt->cam.pos);
+	normalize(&pl->ori);
 	k1 = ft_dot(&(pl->ori), &co);
 	if (!(k2 = ft_dot(&(pl->ori), &(rt->cam.d))))
 		rt->t1 = INT_MAX;
@@ -86,6 +67,7 @@ int	intersect_sq(t_rt *rt, t_elem *sq)
 	float	k2;
 
 	co = v_new(sq->pos, rt->cam.pos);
+	normalize(&sq->ori);
 	k1 = ft_dot(&(sq->ori), &co);
 	rt->t2 = INT_MAX;
 	if (!(k2 = ft_dot(&rt->cam.d, &sq->ori)))
@@ -104,6 +86,52 @@ int	intersect_sq(t_rt *rt, t_elem *sq)
 	return (0);
 }
 
+int	check_tr(t_rt *rt, t_xyz hit, t_elem *tr)
+{
+	t_xyz	edge;
+	t_xyz	tr_hit;
+	t_xyz	h_cross;
+
+	tr_hit = v_new(hit, tr->a);
+	edge = v_new(tr->b, tr->a);
+	h_cross = cross(edge, tr_hit);
+	if (ft_dot(&tr->ori, &h_cross) < 0)
+		rt->t1 = INT_MAX;
+	tr_hit = v_new(hit, tr->b);
+	edge = v_new(tr->c, tr->b);
+	h_cross = cross(edge, tr_hit);
+	if (ft_dot(&tr->ori, &h_cross) < 0)
+		rt->t1 = INT_MAX;
+	tr_hit = v_new(hit, tr->c);
+	edge = v_new(tr->a, tr->c);
+	h_cross = cross(edge, tr_hit);
+	if (ft_dot(&tr->ori, &h_cross) < 0)
+		rt->t1 = INT_MAX;
+	return (1);
+}
+
+int	intersect_tr(t_rt *rt, t_elem *tr)
+{
+	float k1;
+	float k2;
+	t_xyz ac;
+	t_xyz hit;
+
+	tr->ori = cross(v_new(tr->b, tr->a), v_new(tr->c, tr->a));
+	normalize(&tr->ori);
+	rt->t2 = INT_MAX;
+	ac = v_new(rt->cam.pos, tr->a);
+	k1 = ft_dot(&tr->ori, &ac);
+	if (!(k2 = ft_dot(&tr->ori, &rt->cam.d)))
+	{
+		rt->t1 = INT_MAX;
+		return (0);
+	}
+	rt->t1 = k1 / k2;
+	hit = v_new(rt->cam.pos, v_multi(rt->cam.d, rt->t1));
+	return (check_tr(rt, hit, tr));
+}
+
 int	ft_color(int r, int g, int b)
 {
 	int rgb;
@@ -120,6 +148,8 @@ void	intersect_init(t_rt *rt, t_elem *elem)
 		intersect_pl(rt, elem);
 	else if(elem->id == SQUARE)
 		intersect_sq(rt, elem);
+	else if(elem->id == TRIANGLE)
+		intersect_tr(rt, elem);
 
 }
 

@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/01/12 20:39:27 by sabra            ###   ########.fr        #
+#    Updated: 2021/01/18 17:31:19 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		= minirt
 SRCS		= srcs/main.c \
 		  srcs/pars_start.c \
 		  srcs/pars_objects.c \
-		  srcs/ft_dot.c \
 		  srcs/render.c \
+		  srcs/vector.c \
 
 OBJS		= $(SRCS:.c=.o)
 

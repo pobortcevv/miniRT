@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 12:46:14 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 18:56:46 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FLOAT 12
 # define STRING 13
 
-typedef struct	s_xyx
+typedef struct	s_xyz
 {
 	float x;
 	float y;
@@ -62,6 +62,9 @@ typedef struct	s_elem
 	float	len;
 	float	h;
 	float	r;
+	t_xyz	a;
+	t_xyz	b;
+	t_xyz	c;
 	t_xyz	ori;
 	t_xyz	pos;
 	t_color	color;

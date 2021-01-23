@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 12:04:58 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/18 18:02:00 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		ft_pars(t_rt *rt)
 			result = parse_plane(rt);
 		if ((ft_memcmp(rt->split[0], "sq", ft_strlen(rt->split[0]))) == 0)
 			result = parse_square(rt);
+		if ((ft_memcmp(rt->split[0], "tr", ft_strlen(rt->split[0]))) == 0)
+			result = parse_triangle(rt);
 		ft_free_mat(rt->split);
 		ft_free_line(rt->line);
 	}
