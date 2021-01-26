@@ -12,6 +12,57 @@
 
 #include "../includes/minirt.h"
 
+int		parse_ambiant(t_rt *rt)
+{
+	char	**place_split;
+
+	if (ft_charcnt(rt->split[2], ',') != 2)
+		return (0);
+	place_split = ft_split(rt->split[2], ',');
+	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT)
+			|| !dushnila_defence(rt->split[1], FLOAT))
+		return (0);
+	rt->amb.color.b = ft_atof(place_split[0]);
+	rt->amb.color.g = ft_atof(place_split[1]);
+	rt->amb.color.r = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	if ((rt->amb.ratio = ft_atof(rt->split[1])) < 0 || (rt->amb.ratio > 1))
+		return (0);
+	return (1);
+}
+
+int		parse_light(t_rt *rt)
+{
+	char	**place_split;
+	t_lgt	*l;
+
+	l = ft_calloc(1, sizeof(t_lgt));
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
+		return (0);
+	place_split = ft_split(rt->split[1], ',');
+	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT)
+			|| !dushnila_defence(rt->split[2], FLOAT))
+		return (0);
+	l->pos.x = ft_atof(place_split[0]);
+	l->pos.y = ft_atof(place_split[1]);
+	l->pos.z = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	if ((l->bright = ft_atof(rt->split[2])) < 0 || (l->bright > 1))
+		return (0);
+	place_split = ft_split(rt->split[3], ',');
+	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+			!dushnila_defence(place_split[2], FLOAT))
+		return (0);
+	l->color.b = ft_atof(place_split[0]);
+	l->color.g = ft_atof(place_split[1]);
+	l->color.r = ft_atof(place_split[2]);
+	ft_free_mat(place_split);
+	ft_lstadd_back(&rt->lgt_lst, ft_lstnew(l));
+	return (1);
+}
+
 int		parse_sphere(t_rt *rt)
 {
 	char	**place_split;

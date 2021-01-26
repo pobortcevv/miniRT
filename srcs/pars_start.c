@@ -57,12 +57,12 @@ int		ft_pars(t_rt *rt)
 		rt->split = ft_split(rt->line, ' ');
 		if ((ft_memcmp(rt->split[0], "R", ft_strlen(rt->split[0]))) == 0)
 			 result = parse_res(rt);
-		//else if (rt->split[0][0] == 'A')
-			//parse_scene(rt, AMBIANT);
+		else if ((ft_memcmp(rt->split[0], "A", ft_strlen(rt->split[0]))) == 0)
+			result = parse_ambiant(rt);
 		if ((ft_memcmp(rt->split[0], "c", ft_strlen(rt->split[0]))) == 0)
-			 result = parse_camera(rt);
-		//else if (rt->split[0][0] == 'l')
-			//parse_scene(rt, LIGHT);
+			result = parse_camera(rt);
+		if ((ft_memcmp(rt->split[0], "l", ft_strlen(rt->split[0]))) == 0)
+			result = parse_light(rt);
 		if ((ft_memcmp(rt->split[0], "sp", ft_strlen(rt->split[0]))) == 0)
 			result = parse_sphere(rt);
 		if ((ft_memcmp(rt->split[0], "pl", ft_strlen(rt->split[0]))) == 0)

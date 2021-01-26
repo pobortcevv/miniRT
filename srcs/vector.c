@@ -20,6 +20,11 @@ float 	ft_dot(t_xyz *vec1, t_xyz *vec2)
 	return (result);
 }
 
+float	v_len(t_xyz v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
 void	normalize(t_xyz *v)
 {
 	float len;
@@ -57,5 +62,15 @@ t_xyz	v_multi(t_xyz v, float n)
 	v_res.x = v.x * n;
 	v_res.y = v.y * n;
 	v_res.z = v.z * n;
+	return (v_res);
+}
+
+t_xyz	v_plus(t_xyz v1, t_xyz v2)
+{
+	t_xyz	v_res;
+
+	v_res.x = v1.x + v2.x;
+	v_res.y = v1.y + v2.y;
+	v_res.z = v1.z + v2.z;
 	return (v_res);
 }

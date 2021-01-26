@@ -136,7 +136,7 @@ int	ft_color(int r, int g, int b)
 {
 	int rgb;
 
-	rgb = (r<<0) | (g<<8) | (b<<16);
+	rgb = b*255*255 + g*255 + r;
 	return (rgb);
 }
 
@@ -171,12 +171,64 @@ t_elem	*ft_lstcnt(t_list *list, int index)
 	return (elem);
 }
 
+t_lgt	*ft_lstlgt(t_list *list, int index)
+{
+	int 	i;
+	t_list 	*lst;
+	t_lgt 	*lgt;
+
+	lst = list;
+	lgt = lst->content;
+	i = 0;
+	while (i != index)
+	{
+		lst = lst->next;
+		lgt = lst->content;
+		i++;
+	}
+	return (lgt);
+}
+float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
+{
+	int	i;
+	float	light;
+	t_lgt	*lgt;
+	
+	light = 0;
+	i = 0;
+	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
+	cl_elem->norm = v_new(cl_elem->pos, cl_elem->p);
+	normalize(&cl_elem->norm);
+	light += rt->amb.ratio;
+	while (i < ft_lstsize(rt->lgt_lst))
+	{
+		lgt = ft_lstlgt(rt->lgt_lst, i);
+		cl_elem->l = v_new(lgt->pos, cl_elem->p);
+		//if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
+			//light += rt->amb.ratio * cl_elem->n_dot_l/(v_len(cl_elem->norm) * v_len(cl_elem->l));
+		i++;
+	}
+	return (light);
+}
+
+void	c_multi(t_color *c, float n)
+{
+	if ((c->r *= n) > 255)
+		c->r = 255;
+	if ((c->g *= n) > 255)
+		c->g = 255;
+	if ((c->b *= n) > 255)
+		c->b = 255;
+}
+
+
 int	trace_ray(t_rt *rt, float min_t)
 {
 	float	closest_t;
 	int	color;
 	t_elem	*closest_elem;
 	int	i;
+
 
 	closest_t = INT_MAX;
 	i = 0;
@@ -198,17 +250,19 @@ int	trace_ray(t_rt *rt, float min_t)
 	}
 	if (closest_t == INT_MAX)
 		return ((0<<16) | (0<<8) | (0<<0));
+	c_multi(&closest_elem->color, comp_light(rt, closest_elem, closest_t));
 	color = ft_color(closest_elem->color.r, closest_elem->color.g, closest_elem->color.b);
 	return (color);
 }
 
 void	render(t_rt *rt)
 {
-	int x;
-	int y;
-	int color;
+	int		x;
+	int	 	y;
+	int	color;
 
 	x = 0;
+	color = 0;
 	while (x < rt->res.x)
 	{
 		y = 0;

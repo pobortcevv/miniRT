@@ -55,6 +55,19 @@ typedef struct	s_cam
 	int	num;
 }		t_cam;
 
+typedef struct	s_amb
+{
+	float	ratio;
+	t_color	color;
+}		t_amb;
+
+typedef struct	s_lgt
+{
+	t_xyz	pos;
+	float	bright;
+	t_color	color;
+}		t_lgt;
+
 typedef struct	s_elem
 {
 	int	id;
@@ -62,9 +75,13 @@ typedef struct	s_elem
 	float	len;
 	float	h;
 	float	r;
+	float	n_dot_l;
 	t_xyz	a;
 	t_xyz	b;
 	t_xyz	c;
+	t_xyz	p;
+	t_xyz	l;
+	t_xyz	norm;
 	t_xyz	ori;
 	t_xyz	pos;
 	t_color	color;

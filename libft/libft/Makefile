@@ -54,7 +54,7 @@ SRCS	=	ft_memset.c \
 
 OBJS			= $(SRCS:.c=.o)
 
-.SILENT: $(NAME) compile clean fclean re
+.SILENT: all $(NAME) compile clean fclean re
 
 BONUS			=	ft_lstnew.c \
 					ft_lstadd_front.c \
