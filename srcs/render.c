@@ -22,7 +22,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 	vw = 2 * tan(rt->cam.fov / 2);
 	vh = 2 * tan(rt->cam.fov / 2);
 	scale_w = vw / rt->res.x; 
-	scale_h = vh / rt->res.y; 
+	scale_h = vh / rt->res.x; 
 	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
 	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.y;
 	rt->cam.d.z = 1;
