@@ -136,7 +136,7 @@ int	ft_color(int r, int g, int b)
 {
 	int rgb;
 
-	rgb = b*255*255 + g*255 + r;
+	rgb = (b<<16) | (g<<8) | (r<<0);
 	return (rgb);
 }
 
@@ -144,12 +144,12 @@ void	intersect_init(t_rt *rt, t_elem *elem)
 {
 	if (elem->id == SPHERE)
 		intersect_sp(rt, elem);
-	else if(elem->id == PLANE)
-		intersect_pl(rt, elem);
-	else if(elem->id == SQUARE)
-		intersect_sq(rt, elem);
-	else if(elem->id == TRIANGLE)
-		intersect_tr(rt, elem);
+	//else if(elem->id == PLANE)
+		//intersect_pl(rt, elem);
+	//else if(elem->id == SQUARE)
+		//intersect_sq(rt, elem);
+	//else if(elem->id == TRIANGLE)
+		//intersect_tr(rt, elem);
 
 }
 
@@ -204,28 +204,35 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	{
 		lgt = ft_lstlgt(rt->lgt_lst, i);
 		cl_elem->l = v_new(lgt->pos, cl_elem->p);
-		//if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
-			//light += rt->amb.ratio * cl_elem->n_dot_l/(v_len(cl_elem->norm) * v_len(cl_elem->l));
+		if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
+			light += rt->amb.ratio * cl_elem->n_dot_l/(v_len(cl_elem->norm) * v_len(cl_elem->l));
+		cl_elem->v_r = v_multi(cl_elem->norm, 2 * ft_dot(&cl_elem->norm, &cl_elem->l));
+		cl_elem->v_r = v_new(cl_elem->v_r, cl_elem->l);
+		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
+		if(cl_elem->r_dot_v > 0)
+			light += rt->amb.ratio * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 100);
 		i++;
 	}
 	return (light);
 }
 
-void	c_multi(t_color *c, float n)
+t_color	c_multi(t_elem c, float n)
 {
-	if ((c->r *= n) > 255)
-		c->r = 255;
-	if ((c->g *= n) > 255)
-		c->g = 255;
-	if ((c->b *= n) > 255)
-		c->b = 255;
-}
+	t_color res;
 
+	if ((res.r = c.color.r * n) > 255)
+		res.r = 255;
+	if ((res.g = c.color.g * n) > 255)
+		res.g = 255;
+	if ((res.b = c.color.b * n) > 255)
+		res.b = 255;
+	return (res);
+}
 
 int	trace_ray(t_rt *rt, float min_t)
 {
 	float	closest_t;
-	int	color;
+	t_color	color;
 	t_elem	*closest_elem;
 	int	i;
 
@@ -250,9 +257,9 @@ int	trace_ray(t_rt *rt, float min_t)
 	}
 	if (closest_t == INT_MAX)
 		return ((0<<16) | (0<<8) | (0<<0));
-	c_multi(&closest_elem->color, comp_light(rt, closest_elem, closest_t));
-	color = ft_color(closest_elem->color.r, closest_elem->color.g, closest_elem->color.b);
-	return (color);
+	color = closest_elem->color;
+	color =  c_multi(*closest_elem, comp_light(rt, closest_elem, closest_t));
+	return (ft_color(color.r, color.g, color.b));
 }
 
 void	render(t_rt *rt)

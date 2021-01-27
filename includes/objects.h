@@ -76,6 +76,8 @@ typedef struct	s_elem
 	float	h;
 	float	r;
 	float	n_dot_l;
+	float	r_dot_v;
+	t_xyz	v_r;
 	t_xyz	a;
 	t_xyz	b;
 	t_xyz	c;
