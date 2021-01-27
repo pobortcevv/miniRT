@@ -225,7 +225,7 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	{
 		lgt = ft_lstlgt(rt->lgt_lst, i++);
 		cl_elem->l = v_new(lgt->pos, cl_elem->p);
-		if (shadow_intersect(rt, cl_elem) == INT_MAX)
+		if (shadow_intersect(rt, cl_elem) != INT_MAX)
 			continue;
 
 		if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
