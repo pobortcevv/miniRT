@@ -189,6 +189,11 @@ t_lgt	*ft_lstlgt(t_list *list, int index)
 	return (lgt);
 }
 
+t_xyz	reflect_ray(t_xyz r, t_xyz norm)
+{
+	return (v_new(r, v_multi(norm, 2 * ft_dot(&norm, &r))));
+}
+
 float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 {
 	float	closest_t;
@@ -205,9 +210,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 			continue;
 		}
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.0001 && rt->t1 <= 1 && rt->t1 < closest_t)
+		if (rt->t1 >= 0.001 && rt->t1 <= 1 && rt->t1 < closest_t)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.0001 && rt->t2 <= 1 && rt->t2 < closest_t)
+		if (rt->t2 >= 0.001 && rt->t2 <= 1 && rt->t2 < closest_t)
 			closest_t = rt->t2;
 		i++;
 	}
@@ -222,6 +227,7 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	
 	light = 0;
 	i = 0;
+	v_multi(rt->cam.d, -1);
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
 	cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
 	normalize(&cl_elem->norm);
@@ -232,10 +238,9 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->l = v_new(lgt->pos, cl_elem->p);
 		if (shadow_intersect(rt, cl_elem) != INT_MAX)
 			continue;
-
 		if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
 			light += lgt->bright * cl_elem->n_dot_l/(v_len(cl_elem->norm) * v_len(cl_elem->l));
-		cl_elem->v_r = v_multi(cl_elem->norm, 2 * ft_dot(&cl_elem->norm, &cl_elem->l));
+		cl_elem->v_r = reflect_ray(cl_elem->l, cl_elem->norm);
 		cl_elem->v_r = v_new(cl_elem->v_r, cl_elem->l);
 		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
 		if(cl_elem->r_dot_v > 0)
