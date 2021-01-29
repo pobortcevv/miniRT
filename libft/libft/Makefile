@@ -70,7 +70,7 @@ BONUS_OBJS		= 	$(BONUS:.c=.o)
 
 CC				= @gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -g -lm
+CFLAGS			= -Wall -Wextra -Werror -g 
 
 
 all:			$(NAME)

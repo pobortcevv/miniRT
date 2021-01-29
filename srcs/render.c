@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 20:58:23 by sabra            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:00:59 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
 	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.y;
 	rt->cam.d.z = 1;
+	normalize(&rt->cam.d);
 }
 
 void	intersect_sp(t_rt *rt, t_elem *sp, t_xyz start, t_xyz finish)
@@ -197,22 +198,16 @@ t_xyz	reflect_ray(t_xyz r, t_xyz norm)
 float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 {
 	float	closest_t;
-	int	i;
-
+	int		i;
 
 	closest_t = INT_MAX;
 	i = 0;
 	while (i < ft_lstsize(rt->ob_lst))
 	{
-		if (cl_elem == ft_lstcnt(rt->ob_lst, i))
-		{
-			i++;
-			continue;
-		}
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.001 && rt->t1 <= 1 && rt->t1 < closest_t)
+		if (rt->t1 >= 0.0001 && rt->t1 < 1 && rt->t1 < closest_t)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.001 && rt->t2 <= 1 && rt->t2 < closest_t)
+		if (rt->t2 >= 0.0001 && rt->t2 < 1 && rt->t2 < closest_t)
 			closest_t = rt->t2;
 		i++;
 	}
@@ -227,7 +222,6 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	
 	light = 0;
 	i = 0;
-	v_multi(rt->cam.d, -1);
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
 	cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
 	normalize(&cl_elem->norm);
@@ -241,7 +235,6 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		if((cl_elem->n_dot_l = ft_dot(&cl_elem->norm, &cl_elem->l)) > 0)
 			light += lgt->bright * cl_elem->n_dot_l/(v_len(cl_elem->norm) * v_len(cl_elem->l));
 		cl_elem->v_r = reflect_ray(cl_elem->l, cl_elem->norm);
-		cl_elem->v_r = v_new(cl_elem->v_r, cl_elem->l);
 		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
 		if(cl_elem->r_dot_v > 0)
 			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 100);

@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/01/18 17:31:19 by sabra            ###   ########.fr        #
+#    Updated: 2021/01/29 12:06:22 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror -g -O0
 LIBFT_DIR	= ./libft/libft/
 LIBS		= -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -L/usr/lib -lX11 -lXext -lm
-LIBS_MAC	= -L$(LIBFT_DIR) -lft -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+LIBS_MAC	= -L$(LIBFT_DIR) -lft -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit 
 INCLUDES = -I./includes
 
 all:		
@@ -36,13 +36,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
-	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)
