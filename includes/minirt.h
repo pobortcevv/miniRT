@@ -26,12 +26,15 @@
 typedef struct	s_rt
 {
 	int	fd;
+	int	depth;
 	void	*mlx;
 	void	*mlx_win;
 	char	*line;
 	char	**split;
 	float	t1;
 	float	t2;
+	float	closest_t;
+	t_elem	*closest_elem;
 	t_res	res;
 	t_cam	cam;
 	t_amb	amb;
@@ -50,7 +53,6 @@ int             parse_res(t_rt *rt);
 int		dushnila_defence(char *line, int id);
 float		ft_dot(t_xyz *vec1, t_xyz *vec2);
 void		render(t_rt *rt);
-int		trace_ray(t_rt *rt, float min_t);
 int		ft_color(int r, int g, int b);
 void    	intersect_pl(t_rt *rt, t_elem *pl);
 int     	intersect_sq(t_rt *rt, t_elem *sq);

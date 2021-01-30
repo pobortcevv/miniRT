@@ -44,21 +44,21 @@ void	intersect_sp(t_rt *rt, t_elem *sp, t_xyz start, t_xyz finish)
 	rt->t2 = ft_queq(k1, k2, k3, 2);
 }
 
-//void	intersect_pl(t_rt *rt, t_elem *pl)
-//{
-	//t_xyz	co;
-	//float	k1;
-	//float	k2;
-//
-	//co = v_new(pl->pos, rt->cam.pos);
-	//normalize(&pl->ori);
-	//k1 = ft_dot(&(pl->ori), &co);
-	//if (!(k2 = ft_dot(&(pl->ori), &(rt->cam.d))))
-		//rt->t1 = INT_MAX;
-	//else
-		//rt->t1 = (k1 / k2);
-	//rt->t2 = INT_MAX;
-//}
+void	intersect_pl(t_rt *rt, t_elem *pl)
+{
+	t_xyz	co;
+	float	k1;
+	float	k2;
+
+	co = v_new(pl->pos, rt->cam.pos);
+	normalize(&pl->ori);
+	k1 = ft_dot(&(pl->ori), &co);
+	if (!(k2 = ft_dot(&(pl->ori), &(rt->cam.d))))
+		rt->t1 = INT_MAX;
+	else
+		rt->t1 = (k1 / k2);
+	rt->t2 = INT_MAX;
+}
 //
 //int	intersect_sq(t_rt *rt, t_elem *sq)
 //{
@@ -145,8 +145,8 @@ void	intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish)
 {
 	if (elem->id == SPHERE)
 		intersect_sp(rt, elem, start, finish);
-	//else if(elem->id == PLANE)
-		//intersect_pl(rt, elem);
+	else if(elem->id == PLANE)
+		intersect_pl(rt, elem);
 	//else if(elem->id == SQUARE)
 		//intersect_sq(rt, elem);
 	//else if(elem->id == TRIANGLE)
@@ -205,9 +205,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.0001 && rt->t1 < 1 && rt->t1 < closest_t)
+		if (rt->t1 >= 0.001 && rt->t1 <= 1)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.0001 && rt->t2 < 1 && rt->t2 < closest_t)
+		if (rt->t2 >= 0.001 && rt->t2 <= 1)
 			closest_t = rt->t2;
 		i++;
 	}
@@ -242,72 +242,114 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	return (light);
 }
 
-t_color	c_multi(t_elem c, float n)
+t_color	c_multi(t_color c, float n)
 {
 	t_color res;
 
-	if ((res.r = c.color.r * n) > 255)
+	if ((res.r = c.r * n) > 255)
 		res.r = 255;
-	if ((res.g = c.color.g * n) > 255)
+	if ((res.g = c.g * n) > 255)
 		res.g = 255;
-	if ((res.b = c.color.b * n) > 255)
+	if ((res.b = c.b * n) > 255)
 		res.b = 255;
 	return (res);
 }
 
-
-int	trace_ray(t_rt *rt, float min_t)
+t_color	c_null(void)
 {
-	float	closest_t;
-	t_color	color;
-	t_elem	*closest_elem;
+	t_color	res;
+	res.r = 0;
+	res.g = 0;
+	res.b = 0;
+	return (res);
+}
+
+t_color	closest_intersect(t_rt *rt, t_xyz start, t_xyz finish, float t_min)
+{
 	int	i;
 
-
-	closest_t = INT_MAX;
+	rt->closest_t = INT_MAX;
 	i = 0;
-	closest_elem = rt->ob_lst->content;
+	rt->closest_elem = rt->ob_lst->content;
 	while (i < ft_lstsize(rt->ob_lst))
 	{
-		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), rt->cam.pos, rt->cam.d);
-		if (rt->t1 >= min_t && rt->t1 < closest_t)
+		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), start, finish);
+		if (rt->t1 >= t_min && rt->t1 < rt->closest_t)
 		{
-			closest_t = rt->t1;
-			closest_elem = ft_lstcnt(rt->ob_lst, i);
+			rt->closest_t = rt->t1;
+			rt->closest_elem = ft_lstcnt(rt->ob_lst, i);
 		}
-		if (rt->t2 >= min_t && rt->t2 < closest_t)
+		if (rt->t2 >= t_min && rt->t2 < rt->closest_t)
 		{
-			closest_t = rt->t2;
-			closest_elem = ft_lstcnt(rt->ob_lst, i);
+			rt->closest_t = rt->t2;
+			rt->closest_elem = ft_lstcnt(rt->ob_lst, i);
 		}
 		i++;
 	}
-	if (closest_t == INT_MAX)
-		return ((0<<16) | (0<<8) | (0<<0));
-	color = closest_elem->color;
-	color =  c_multi(*closest_elem, comp_light(rt, closest_elem, closest_t));
-	return (ft_color(color.r, color.g, color.b));
+	if (rt->closest_t == INT_MAX)
+		return (c_null());
+	return (rt->closest_elem->color);
+}
+
+t_color	c_plus(t_color c1, t_color c2)
+{
+	t_color res;
+	if ((res.r = c1.r + c2.r) > 255)
+		res.r = 255;
+	if ((res.g = c1.g + c2.g) > 255)
+		res.g = 255;
+	if ((res.b = c1.b + c2.b) > 255)
+		res.b = 255;
+	return (res);
+}
+
+int	c_isnull(t_color c)
+{
+	return (c.r == 0 && c.g == 0 && c.b == 0);
+}
+
+t_color	trace_ray(t_rt *rt, t_xyz start, t_xyz finish, int id)
+{
+	t_color	local_color;
+	t_color	reflected_color;
+	
+	if (id == START_RAY)
+		local_color = closest_intersect(rt, start, finish, 0);
+	else
+		local_color = closest_intersect(rt, start, finish, 0.001);
+	if (c_isnull(local_color))
+		return (local_color);
+	local_color = c_multi(rt->closest_elem->color, comp_light(rt, rt->closest_elem, rt->closest_t));
+	if (rt->depth <= 0)
+		return (local_color);
+	rt->closest_elem->v_r = reflect_ray(rt->cam.d, rt->closest_elem->norm);
+	rt->depth -= 1;
+	reflected_color = trace_ray(rt, rt->closest_elem->p, rt->closest_elem->v_r, MIRROR);
+	reflected_color = c_multi(reflected_color, 0.3);
+	local_color = c_multi(local_color, 0.7);	
+	return (c_plus(local_color, reflected_color));
 }
 
 void	render(t_rt *rt)
 {
 	int		x;
 	int	 	y;
-	int	color;
+	t_color		color;
 
 	x = 0;
-	color = 0;
 	while (x < rt->res.x)
 	{
 		y = 0;
 		while (y < rt->res.y)
 		{
+			rt->depth = 3;
 			to_viewport(x, y, rt);
-			color = trace_ray(rt, 0);
-			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, color);
+			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
+			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));
 			y++;
 		}
 		x++;
+
 	}
 }
 

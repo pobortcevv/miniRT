@@ -24,6 +24,8 @@
 # define INT 11
 # define FLOAT 12
 # define STRING 13
+# define START_RAY 14
+# define MIRROR 15
 
 typedef struct	s_xyz
 {
