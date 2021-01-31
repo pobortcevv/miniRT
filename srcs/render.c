@@ -230,8 +230,14 @@ t_color	c_multi_colors(t_color c1, t_color c2)
 void	light_color(t_color *res, t_color lgt_color, float light)
 {
 	res->r += (lgt_color.r / 255) * light;
+	//if (lgt_color.r == 0)
+		//res->r += light;
 	res->g += (lgt_color.g / 255) * light;
+	//if (lgt_color.g == 0)
+		//res->g += light;
 	res->b += (lgt_color.b / 255) * light;
+	//if (lgt_color.b == 0)
+		//res->b += light;
 }
 
 t_color	c_null(void)
