@@ -214,11 +214,41 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	return (closest_t);
 }
 
-float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
+t_color	c_multi_colors(t_color c1, t_color c2)
+{
+	t_color res;
+
+	if ((res.r = c1.r * c2.r) > 255)
+		res.r = 255;
+	if ((res.g = c1.g * c2.g) > 255)
+		res.g = 255;
+	if ((res.b = c1.b * c2.b) > 255)
+		res.b = 255;
+	return (res);
+}
+
+void	light_color(t_color *res, t_color lgt_color, float light)
+{
+	res->r += (lgt_color.r / 255) * light;
+	res->g += (lgt_color.g / 255) * light;
+	res->b += (lgt_color.b / 255) * light;
+}
+
+t_color	c_null(void)
+{
+	t_color	res;
+	res.r = 0;
+	res.g = 0;
+	res.b = 0;
+	return (res);
+}
+
+t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 {
 	int	i;
 	float	light;
 	t_lgt	*lgt;
+	t_color	result;
 	
 	light = 0;
 	i = 0;
@@ -226,6 +256,8 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
 	normalize(&cl_elem->norm);
 	light += rt->amb.ratio;
+	result = c_null();
+	light_color(&result, rt->amb.color, light);
 	while (i < ft_lstsize(rt->lgt_lst))
 	{
 		lgt = ft_lstlgt(rt->lgt_lst, i++);
@@ -238,8 +270,9 @@ float	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
 		if(cl_elem->r_dot_v > 0)
 			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 100);
+		light_color(&result, lgt->color, light);	
 	}
-	return (light);
+	return (result);
 }
 
 t_color	c_multi(t_color c, float n)
@@ -252,15 +285,6 @@ t_color	c_multi(t_color c, float n)
 		res.g = 255;
 	if ((res.b = c.b * n) > 255)
 		res.b = 255;
-	return (res);
-}
-
-t_color	c_null(void)
-{
-	t_color	res;
-	res.r = 0;
-	res.g = 0;
-	res.b = 0;
 	return (res);
 }
 
@@ -319,7 +343,7 @@ t_color	trace_ray(t_rt *rt, t_xyz start, t_xyz finish, int id)
 		local_color = closest_intersect(rt, start, finish, 0.001);
 	if (c_isnull(local_color))
 		return (local_color);
-	local_color = c_multi(rt->closest_elem->color, comp_light(rt, rt->closest_elem, rt->closest_t));
+	local_color = c_multi_colors(rt->closest_elem->color, comp_light(rt, rt->closest_elem, rt->closest_t));
 	if (rt->depth <= 0)
 		return (local_color);
 	rt->closest_elem->v_r = reflect_ray(rt->cam.d, rt->closest_elem->norm);
@@ -342,7 +366,7 @@ void	render(t_rt *rt)
 		y = 0;
 		while (y < rt->res.y)
 		{
-			rt->depth = 3;
+			rt->depth = 5;
 			to_viewport(x, y, rt);
 			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
 			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));

@@ -67,7 +67,7 @@ t_xyz		v_multi(t_xyz v, float n);
 int		intersect_tr(t_rt *rt, t_elem *tr);
 int		check_tr(t_rt *rt, t_xyz hit, t_elem *tr);
 int		parse_triangle(t_rt *rt);
-float		comp_light(t_rt *rt, t_elem *cl_elem, float t);
+t_color		comp_light(t_rt *rt, t_elem *cl_elem, float t);
 t_xyz		v_plus(t_xyz v1, t_xyz v2);
 float		v_len(t_xyz v);
 
