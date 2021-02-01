@@ -6,11 +6,16 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 19:10:09 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/01 16:08:48 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+/*
+ * Если в сплите не 3 элемента, выходить и чистить place_split
+ */
+
 
 int		parse_ambiant(t_rt *rt)
 {
@@ -19,7 +24,7 @@ int		parse_ambiant(t_rt *rt)
 	if (ft_charcnt(rt->split[2], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[2], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT)
 			|| !dushnila_defence(rt->split[1], FLOAT))
 		return (0);
@@ -41,7 +46,7 @@ int		parse_light(t_rt *rt)
 	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT)
 			|| !dushnila_defence(rt->split[2], FLOAT))
 		return (0);
@@ -52,7 +57,7 @@ int		parse_light(t_rt *rt)
 	if ((l->bright = ft_atof(rt->split[2])) < 0 || (l->bright > 1))
 		return (0);
 	place_split = ft_split(rt->split[3], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
 	l->color.b = ft_atof(place_split[0]);
@@ -71,9 +76,12 @@ int		parse_sphere(t_rt *rt)
 	sp = ft_calloc(1, sizeof(t_elem));
 	sp->id = SPHERE;
 	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
+	{
+		free(sp);
 		return (0);
+	}
 	place_split = ft_split(rt->split[1], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT)
 			|| !dushnila_defence(rt->split[2], FLOAT))
 		return (0);
@@ -84,7 +92,7 @@ int		parse_sphere(t_rt *rt)
 	if ((sp->r = ft_atof(rt->split[2]) / 2) < 0)
 		return (0);
 	place_split = ft_split(rt->split[3], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
 	sp->color.b = ft_atof(place_split[0]);
@@ -94,6 +102,10 @@ int		parse_sphere(t_rt *rt)
 	ft_lstadd_back(&rt->ob_lst, ft_lstnew(sp));
 	return (1);
 }
+
+/*
+ *	Добавить обработку place_split от segfault остальным фигурам
+ */
 
 int		parse_plane(t_rt *rt)
 {
@@ -227,7 +239,7 @@ int		parse_camera(t_rt *rt)
 	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[2], ',') != 2)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT)
 			|| !dushnila_defence(rt->split[3], INT))
 		return (0);
@@ -236,7 +248,7 @@ int		parse_camera(t_rt *rt)
 	rt->cam.pos.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
 	place_split = ft_split(rt->split[2], ',');
-	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
+	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
 	rt->cam.ori.x = ft_atof(place_split[0]);

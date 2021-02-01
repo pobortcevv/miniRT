@@ -6,11 +6,20 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 18:02:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/01 14:10:49 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+int		ft_split_size(char **split)
+{
+	int 	size;
+
+	size = -1;
+	while(split[++size]);
+	return(size);
+}
 
 int		dushnila_defence(char *line, int id)
 {

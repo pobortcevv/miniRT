@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/06 19:29:57 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 15:21:24 by sabra            ###   ########.fr       */
+/*   Created: 2021/02/01 14:38:43 by sabra             #+#    #+#             */
+/*   Updated: 2021/02/01 15:29:51 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minirt.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void		close_hook(t_rt *rt)
 {
-	t_list	*elem;
-	t_list	*list;
-
-	list = *lst;
-	while (list)
-	{
-		elem = list->next;
-		if (del)
-			del(list->content);
-		free(list);
-		list = elem;
-	}
-	*lst = NULL;
+	mlx_destroy_window(rt->mlx, rt->mlx_win);
+	exit(0);
 }

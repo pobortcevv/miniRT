@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/01/29 12:06:22 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/01 15:34:00 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,14 @@ SRCS		= srcs/main.c \
 		  srcs/pars_objects.c \
 		  srcs/render.c \
 		  srcs/vector.c \
+		  srcs/colors.c \
+		  srcs/colors2.c \
+		  srcs/lists_utils.c \
+		  srcs/intersect_objects.c \
+		  srcs/math.c \
+		  srcs/hooks.c \
+		  srcs/events.c \
+
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -36,13 +44,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)

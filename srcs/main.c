@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/01 15:17:38 by sabra             #+#    #+#             */
+/*   Updated: 2021/02/01 16:35:17 by sabra            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 int	ft_check_file(char *file)
@@ -15,7 +27,7 @@ int	start_rt(t_rt *rt)
 {
 	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "minirt");
 	render(rt);
-
+	//mlx_hook(rt->mlx_win, 17, 1L<<0, close_hook, rt);
 
 	mlx_loop(rt->mlx);
 	return (1);
@@ -42,10 +54,12 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	if (ft_pars(&rt) != 1)
-		ft_putstr_fd("Pars error\n", 2);
+		error_exit(&rt, "PARSER ERROR");
 	else
+	{
 		ft_putstr_fd("everything ok\n", 1);
-	start_rt(&rt);
+		start_rt(&rt);
+	}
 	return (1);
 }
 
