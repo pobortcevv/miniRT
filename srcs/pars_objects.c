@@ -21,7 +21,7 @@ int		parse_ambiant(t_rt *rt)
 {
 	char	**place_split;
 
-	if (ft_charcnt(rt->split[2], ',') != 2)
+	if (ft_charcnt(rt->split[2], ',') != 2 || ft_split_size(rt->split) != 3)
 		return (0);
 	place_split = ft_split(rt->split[2], ',');
 	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
@@ -32,6 +32,8 @@ int		parse_ambiant(t_rt *rt)
 	rt->amb.color.g = ft_atof(place_split[1]);
 	rt->amb.color.r = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
+	if (!check_color_parse(rt->amb.color))
+		return (0);
 	if ((rt->amb.ratio = ft_atof(rt->split[1])) < 0 || (rt->amb.ratio > 1))
 		return (0);
 	return (1);
@@ -43,7 +45,8 @@ int		parse_light(t_rt *rt)
 	t_lgt	*l;
 
 	l = ft_calloc(1, sizeof(t_lgt));
-	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2
+			|| ft_split_size(rt->split) != 4)
 		return (0);
 	place_split = ft_split(rt->split[1], ',');
 	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
@@ -64,6 +67,8 @@ int		parse_light(t_rt *rt)
 	l->color.g = ft_atof(place_split[1]);
 	l->color.r = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
+	if (!check_color_parse(l->color))
+		return (0);
 	ft_lstadd_back(&rt->lgt_lst, ft_lstnew(l));
 	return (1);
 }
@@ -75,7 +80,8 @@ int		parse_sphere(t_rt *rt)
 
 	sp = ft_calloc(1, sizeof(t_elem));
 	sp->id = SPHERE;
-	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2)
+	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2
+			|| ft_split_size(rt->split) != 4)
 	{
 		free(sp);
 		return (0);
@@ -99,6 +105,8 @@ int		parse_sphere(t_rt *rt)
 	sp->color.g = ft_atof(place_split[1]);
 	sp->color.r = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
+	if (!check_color_parse(sp->color))
+		return (0);
 	ft_lstadd_back(&rt->ob_lst, ft_lstnew(sp));
 	return (1);
 }
@@ -262,10 +270,13 @@ int		parse_camera(t_rt *rt)
 
 int		parse_res(t_rt *rt)
 {
-	if (!dushnila_defence(rt->split[1], INT) || !dushnila_defence(rt->split[2], INT))
+	if (!dushnila_defence(rt->split[1], INT) || !dushnila_defence(rt->split[2], INT)
+			|| ft_split_size(rt->split) != 3 || rt->res.id == 1)
 		return (0);
 	rt->res.x = ft_atoi(rt->split[1]);
 	rt->res.y = ft_atoi(rt->split[2]);
+	if (rt->res.x < 0 || rt->res.y < 0)
+		return (0);
 	rt->res.id = 1;
 	return (1);
 }

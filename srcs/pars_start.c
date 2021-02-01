@@ -41,14 +41,14 @@ int		dushnila_defence(char *line, int id)
 	}
 	if (id == STRING)
 	{
-		if (!ft_memcmp(line, "R", ft_strlen(line)) || !ft_memcmp(line, "A", ft_strlen(line))
-			|| !ft_memcmp(line, "c", ft_strlen(line))
-			|| !ft_memcmp(line, "l", ft_strlen(line))
-			|| !ft_memcmp(line, "pl", ft_strlen(line))
-			|| !ft_memcmp(line, "sp", ft_strlen(line))
-			|| !ft_memcmp(line, "sq", ft_strlen(line))
-			|| !ft_memcmp(line, "cy", ft_strlen(line))
-			|| !ft_memcmp(line, "tr", ft_strlen(line)))
+		if (ft_strncmp(line, "R", ft_strlen(line)) != 0 && ft_strncmp(line, "A", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "c", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "l", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "pl", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "sp", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "sq", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "cy", ft_strlen(line)) != 0
+			&& ft_strncmp(line, "tr", ft_strlen(line)) != 0)
 			return (0);
 	}
 	return (1);
@@ -64,21 +64,23 @@ int		ft_pars(t_rt *rt)
 		if (*(rt->line) == '\0')
 				continue;
 		rt->split = ft_split(rt->line, ' ');
-		if ((ft_memcmp(rt->split[0], "R", ft_strlen(rt->split[0]))) == 0)
+		if (dushnila_defence(rt->split[0], STRING) == 0)
+			result = 0;
+		if ((ft_strncmp(rt->split[0], "R", ft_strlen(rt->split[0]))) == 0)
 			 result = parse_res(rt);
-		else if ((ft_memcmp(rt->split[0], "A", ft_strlen(rt->split[0]))) == 0)
+		else if ((ft_strncmp(rt->split[0], "A", ft_strlen(rt->split[0]))) == 0)
 			result = parse_ambiant(rt);
-		if ((ft_memcmp(rt->split[0], "c", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "c", ft_strlen(rt->split[0]))) == 0)
 			result = parse_camera(rt);
-		if ((ft_memcmp(rt->split[0], "l", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "l", ft_strlen(rt->split[0]))) == 0)
 			result = parse_light(rt);
-		if ((ft_memcmp(rt->split[0], "sp", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "sp", ft_strlen(rt->split[0]))) == 0)
 			result = parse_sphere(rt);
-		if ((ft_memcmp(rt->split[0], "pl", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "pl", ft_strlen(rt->split[0]))) == 0)
 			result = parse_plane(rt);
-		if ((ft_memcmp(rt->split[0], "sq", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "sq", ft_strlen(rt->split[0]))) == 0)
 			result = parse_square(rt);
-		if ((ft_memcmp(rt->split[0], "tr", ft_strlen(rt->split[0]))) == 0)
+		if ((ft_strncmp(rt->split[0], "tr", ft_strlen(rt->split[0]))) == 0)
 			result = parse_triangle(rt);
 		ft_free_mat(rt->split);
 		ft_free_line(rt->line);

@@ -111,7 +111,7 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->v_r = reflect_ray(cl_elem->l, cl_elem->norm);
 		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
 		if(cl_elem->r_dot_v > 0)
-			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 100);
+			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 10);
 		light_color(&result, lgt->color, light);	
 	}
 	return (result);
@@ -178,7 +178,7 @@ void	render(t_rt *rt)
 		y = 0;
 		while (y < rt->res.y)
 		{
-			rt->depth = 3;
+			rt->depth = 2;
 			to_viewport(x, y, rt);
 			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
 			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));

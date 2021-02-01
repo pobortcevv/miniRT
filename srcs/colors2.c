@@ -29,3 +29,10 @@ int	c_isnull(t_color c)
 {
 	return (c.r == 0 && c.g == 0 && c.b == 0);
 }
+
+int	check_color_parse(t_color c)
+{
+	if (c.r < 0 || c.g < 0 || c.b < 0)
+		return (0);
+	return (1);
+}

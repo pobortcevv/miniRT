@@ -42,7 +42,7 @@ float	ft_atof(char *str)
 	i = str[0] == '-' ? 1 : 0;
 	atoi = ft_atoi(str);
 	atof = 0;
-	div = 1;
+	div = atoi == 0 && i == 1 ? -1 : 1;
 	while (ft_space((str[i])))
 		i++;
 	i += ft_intlen(atoi);

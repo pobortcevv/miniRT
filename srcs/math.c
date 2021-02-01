@@ -27,9 +27,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.001 && rt->t1 <= 1)
+		if (rt->t1 >= 0.001 && rt->t1 < 1)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.001 && rt->t2 <= 1)
+		if (rt->t2 >= 0.001 && rt->t2 < 1)
 			closest_t = rt->t2;
 		i++;
 	}
