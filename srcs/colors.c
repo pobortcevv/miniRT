@@ -46,17 +46,11 @@ t_color	c_null(void)
 	return (res);
 }
 
-void	light_color(t_color *res, t_color lgt_color, float light)
+void	color_light(t_color *res, float light)
 {
-	res->r += (lgt_color.r / 255) * light;
-	//if (lgt_color.r == 0)
-		//res->r += light;
-	res->g += (lgt_color.g / 255) * light;
-	//if (lgt_color.g == 0)
-		//res->g += light;
-	res->b += (lgt_color.b / 255) * light;
-	//if (lgt_color.b == 0)
-		//res->b += light;
+	res->r *= light;
+	res->g *= light;
+	res->b *= light;
 }
 
 int	ft_color(int r, int g, int b)

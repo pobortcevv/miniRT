@@ -25,14 +25,16 @@ float	v_len(t_xyz v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-void	normalize(t_xyz *v)
+t_xyz	normalize(t_xyz v)
 {
 	float len;
+	t_xyz res;
 
-	len = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	v->x /= len;
-	v->y /= len;
-	v->z /= len;
+	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	res.x = v.x / len;
+	res.y = v.y / len;
+	res.z = v.z / len;
+	return (res);
 }
 
 t_xyz	cross(t_xyz v1, t_xyz v2)

@@ -83,7 +83,7 @@ int		parse_sphere(t_rt *rt)
 	if (ft_charcnt(rt->split[1], ',') != 2 || ft_charcnt(rt->split[3], ',') != 2
 			|| ft_split_size(rt->split) != 4)
 	{
-		free(sp);
+		error_parse(rt, "wrong symbols\n", sp);
 		return (0);
 	}
 	place_split = ft_split(rt->split[1], ',');

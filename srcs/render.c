@@ -12,33 +12,6 @@
 
 #include "../includes/minirt.h"
 
-//int	intersect_sq(t_rt *rt, t_elem *sq)
-//{
-	//t_xyz	co;
-	//t_xyz	hit;
-	//float	k1;
-	//float	k2;
-//
-	//co = v_new(sq->pos, rt->cam.pos);
-	//normalize(&sq->ori);
-	//k1 = ft_dot(&(sq->ori), &co);
-	//rt->t2 = INT_MAX;
-	//if (!(k2 = ft_dot(&rt->cam.d, &sq->ori)))
-	//{
-		//rt->t1 = INT_MAX;
-		//return (0);
-	//}
-	//rt->t1 = (k1 / k2);
-	//hit = v_new(rt->cam.pos, v_multi(rt->cam.d, rt->t1));
-	//if (fabs(hit.x - sq->pos.x) <= (sq->len / 2) &&
-			//fabs(hit.y - sq->pos.y) <= (sq->len / 2) &&
-			//fabs(hit.z - sq->pos.z) <= (sq->len / 2))
-		//return (1);
-	//else
-		//rt->t1 = INT_MAX;
-	//return (0);
-//}
-//
 //int	check_tr(t_rt *rt, t_xyz hit, t_elem *tr)
 //{
 	//t_xyz	edge;
@@ -96,10 +69,10 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	i = 0;
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
 	cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
-	normalize(&cl_elem->norm);
+	cl_elem->norm = normalize(cl_elem->norm);
 	light += rt->amb.ratio;
-	result = c_null();
-	light_color(&result, rt->amb.color, light);
+	result = c_one();
+	color_ambiant(&result, rt->amb.color);
 	while (i < ft_lstsize(rt->lgt_lst))
 	{
 		lgt = ft_lstlgt(rt->lgt_lst, i++);
@@ -111,9 +84,10 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->v_r = reflect_ray(cl_elem->l, cl_elem->norm);
 		cl_elem->r_dot_v = ft_dot(&cl_elem->v_r, &rt->cam.d);
 		if(cl_elem->r_dot_v > 0)
-			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 10);
-		light_color(&result, lgt->color, light);	
+			light += lgt->bright * powf(cl_elem->r_dot_v/(v_len(cl_elem->v_r) * v_len(rt->cam.d)), 100);
+		color_ambiant(&result, lgt->color);	
 	}
+	color_light(&result, light);	
 	return (result);
 }
 
@@ -178,7 +152,7 @@ void	render(t_rt *rt)
 		y = 0;
 		while (y < rt->res.y)
 		{
-			rt->depth = 2;
+			rt->depth = 3;
 			to_viewport(x, y, rt);
 			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
 			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));

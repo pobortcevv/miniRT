@@ -36,3 +36,20 @@ int	check_color_parse(t_color c)
 		return (0);
 	return (1);
 }
+
+void	color_ambiant(t_color *c, t_color light_color)
+{
+	c->r *= light_color.r / 255;
+	c->g *= light_color.g / 255;
+	c->b *= light_color.b / 255;
+}
+
+t_color	c_one(void)
+{
+	t_color res;
+
+	res.r = 1;
+	res.g = 1;
+	res.b = 1;
+	return (res);
+}

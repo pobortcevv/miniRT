@@ -27,7 +27,7 @@ int	start_rt(t_rt *rt)
 {
 	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "minirt");
 	render(rt);
-	//mlx_hook(rt->mlx_win, 17, 1L<<0, close_hook, rt);
+	//mlx_hook(rt->mlx_win, 17, 1L<<0, close, rt);
 
 	mlx_loop(rt->mlx);
 	return (1);
@@ -39,27 +39,14 @@ int	main(int ac, char **av)
 
 	ft_bzero(&rt, sizeof(t_rt));
 	if(!(rt.mlx = mlx_init()))
-	{
-		ft_printf("mlx error\n");
-		return (0);
-	}
+		error_exit(&rt, "MLX ERROR\n");
 	if (ac > 3 || ac == 1 || (ac == 2 && !ft_check_file(av[1])))
-	{
-		ft_printf("arguments error\n");
-		return (0);
-	}
+		error_exit(&rt, "ARGUMENTS ERROR\n");
 	if (!(rt.fd = open(av[1], O_RDONLY)))
-	{
-		ft_printf("open fail\n");
-		return (0);
-	}
+		error_exit(&rt, "OPEN FILE ERROR\n");
 	if (ft_pars(&rt) != 1)
-		error_exit(&rt, "PARSER ERROR");
-	else
-	{
-		ft_putstr_fd("everything ok\n", 1);
-		start_rt(&rt);
-	}
+		error_exit(&rt, "PARSER ERROR\n");
+	ft_putstr_fd("everything ok\n", 1);
+	start_rt(&rt);
 	return (1);
 }
-

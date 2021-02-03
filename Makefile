@@ -33,7 +33,7 @@ OBJS		= $(SRCS:.c=.o)
 MINILIBX_DIR 	= minilibx-linux/
 CC			= gcc 
 RM			= rm -f
-CFLAGS		= -Wall -Wextra -Werror -g -O0
+CFLAGS		= -Wall -Wextra -Werror -g -ggdb3
 LIBFT_DIR	= ./libft/libft/
 LIBS		= -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -L/usr/lib -lX11 -lXext -lm
 LIBS_MAC	= -L$(LIBFT_DIR) -lft -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit 
