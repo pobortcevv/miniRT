@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 11:30:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:15:54 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,4 @@ void	to_viewport(int x, int y, t_rt *rt)
 	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
 	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.y;
 	rt->cam.d.z = 1;
-	normalize(&rt->cam.d);
 }

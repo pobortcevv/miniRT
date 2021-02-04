@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 16:08:48 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:14:10 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,25 +208,25 @@ int		parse_triangle(t_rt *rt)
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
-	tr->a.x = ft_atof(place_split[0]);
-	tr->a.y = ft_atof(place_split[1]);
-	tr->a.z = ft_atof(place_split[2]);
+	tr->vertex0.x = ft_atof(place_split[0]);
+	tr->vertex0.y = ft_atof(place_split[1]);
+	tr->vertex0.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
 	place_split = ft_split(rt->split[2], ',');
 if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
-	tr->b.x = ft_atof(place_split[0]);
-	tr->b.y = ft_atof(place_split[1]);
-	tr->b.z = ft_atof(place_split[2]);
+	tr->vertex1.x = ft_atof(place_split[0]);
+	tr->vertex1.y = ft_atof(place_split[1]);
+	tr->vertex1.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
 	place_split = ft_split(rt->split[3], ',');
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		return (0);
-	tr->c.x = ft_atof(place_split[0]);
-	tr->c.y = ft_atof(place_split[1]);
-	tr->c.z = ft_atof(place_split[2]);
+	tr->vertex2.x = ft_atof(place_split[0]);
+	tr->vertex2.y = ft_atof(place_split[1]);
+	tr->vertex2.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
 	place_split = ft_split(rt->split[4], ',');
 	if (!dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||

@@ -6,22 +6,22 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 15:36:48 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:34:58 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -56,7 +56,7 @@ void		render(t_rt *rt);
 int			parse_plane(t_rt *rt);
 int			parse_square(t_rt *rt);
 t_xyz		normalize(t_xyz v);
-t_xyz		cross(t_xyz v1, t_xyz v2);
+t_xyz		v_cross(t_xyz v1, t_xyz v2);
 t_xyz		v_new(t_xyz v1, t_xyz v2);
 t_xyz		v_multi(t_xyz v, float n);
 int			check_tr(t_rt *rt, t_xyz hit, t_elem *tr);
@@ -77,7 +77,7 @@ t_elem		*ft_lstcnt(t_list *list, int index);
 t_lgt		*ft_lstlgt(t_list *list, int index);
 void    	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish);
 int     	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish);
-int			intersect_tr(t_rt *rt, t_elem *tr);
+int			intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish);
 void		intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish);
 void		to_viewport(int x, int y, t_rt *rt); 
 float		shadow_intersect(t_rt *rt, t_elem *cl_elem);

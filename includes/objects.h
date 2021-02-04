@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 18:56:46 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:33:09 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,21 @@ typedef struct	s_elem
 	int	id;
 	
 	float	len;
-	float	h;
 	float	r;
 	float	n_dot_l;
 	float	r_dot_v;
+	float	a;
 	t_xyz	v_r;
-	t_xyz	a;
-	t_xyz	b;
-	t_xyz	c;
 	t_xyz	p;
 	t_xyz	l;
+	t_xyz	vertex0;
+	t_xyz	vertex1;
+	t_xyz	vertex2;
+	t_xyz	edge1;
+	t_xyz	edge2;
+	t_xyz	hight;
+	t_xyz	s;
+	t_xyz	q;
 	t_xyz	norm;
 	t_xyz	ori;
 	t_xyz	pos;

@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 11:18:34 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 14:24:00 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish)
 
 
 	co = v_new(pl->pos, start);
-	co = normalize(co);
-	k1 = ft_dot(&(pl->ori), &co);
+	pl->ori = normalize(pl->ori);
+	k1 = ft_dot(&pl->ori, &co);
 	k2 = ft_dot(&pl->ori, &finish);
 	if (k2 == 0)
 		rt->t1 = INT_MAX;
@@ -53,7 +53,7 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	float	k2;
 
 	co = v_new(sq->pos, start);
-	co = normalize(co);
+	sq->ori = normalize(sq->ori);
 	k1 = ft_dot(&(sq->ori), &co);
 	rt->t2 = INT_MAX;
 	k2 = ft_dot(&finish, &sq->ori);
@@ -73,6 +73,36 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	return (0);
 }
 
+int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
+{
+	float a;
+	float f;
+	float u;
+	float v;
+	
+	rt->t2 = INT_MAX;
+	rt->t1 = INT_MAX;
+	tr->edge1 = v_new(tr->vertex1, tr->vertex0);
+	tr->edge2 = v_new(tr->vertex2, tr->vertex0);
+	tr->hight = v_cross(finish, tr->edge2);
+	a = ft_dot(&tr->edge1, &tr->hight);
+	if (a > -0.00001 && a < 0.00001)
+		return (0);
+	tr->s = v_new(start, tr->vertex0);
+	f = 1 / a;
+	u = f * ft_dot(&tr->s, &tr->hight);
+	if (u < 0 || u > 1)
+		return (0);
+	tr->q = v_cross(tr->s, tr->edge1);
+	v = f * ft_dot(&finish, &tr->q);
+	if (v < 0 || v + u > 1)
+		return (0);
+	rt->t1 = f * ft_dot(&tr->edge2, &tr->q);
+	if (rt->t1 <= 0.00001)
+		rt->t1 = INT_MAX;
+	return (1);
+}
+
 void	intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish)
 {
 	if (elem->id == SPHERE)
@@ -81,7 +111,7 @@ void	intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish)
 		intersect_pl(rt, elem, start, finish);
 	else if(elem->id == SQUARE)
 		intersect_sq(rt, elem, start, finish);
-	//else if(elem->id == TRIANGLE)
-		//intersect_tr(rt, elem);
+	else if(elem->id == TRIANGLE)
+		intersect_tr(rt, elem, start, finish);
 
 }

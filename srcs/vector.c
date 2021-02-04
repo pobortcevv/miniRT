@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:22:24 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/18 18:21:20 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 12:18:06 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_xyz	normalize(t_xyz v)
 	return (res);
 }
 
-t_xyz	cross(t_xyz v1, t_xyz v2)
+t_xyz	v_cross(t_xyz v1, t_xyz v2)
 {
 	t_xyz	v_res;
 

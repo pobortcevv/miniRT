@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 16:42:09 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/04 14:26:00 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	light = 0;
 	i = 0;
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
-	cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
+	if (cl_elem->id == SPHERE)
+		cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
+	else
+		cl_elem->norm = cl_elem->ori;
 	cl_elem->norm = normalize(cl_elem->norm);
 	light += rt->amb.ratio;
 	result = c_one();
@@ -152,7 +155,7 @@ void	render(t_rt *rt)
 		y = 0;
 		while (y < rt->res.y)
 		{
-			rt->depth = 3;
+			rt->depth = 0;
 			to_viewport(x, y, rt);
 			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
 			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));
