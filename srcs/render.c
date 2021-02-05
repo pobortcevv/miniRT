@@ -155,7 +155,7 @@ void	render(t_rt *rt)
 		y = 0;
 		while (y < rt->res.y)
 		{
-			rt->depth = 0;
+			rt->depth = 3;
 			to_viewport(x, y, rt);
 			color = trace_ray(rt, rt->cam.pos, rt->cam.d, START_RAY);
 			mlx_pixel_put(rt->mlx, rt->mlx_win, x, y, ft_color(color.r, color.g, color.b));

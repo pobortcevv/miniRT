@@ -86,7 +86,7 @@ int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 	tr->edge2 = v_new(tr->vertex2, tr->vertex0);
 	tr->hight = v_cross(finish, tr->edge2);
 	a = ft_dot(&tr->edge1, &tr->hight);
-	if (a > -0.00001 && a < 0.00001)
+	if (a > -0.00001 && a < 0.00001) /*Рейкаст параллелен треугольнику*/
 		return (0);
 	tr->s = v_new(start, tr->vertex0);
 	f = 1 / a;

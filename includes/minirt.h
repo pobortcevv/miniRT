@@ -13,15 +13,15 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-//# include "../minilibx-linux/mlx.h"
-//# include "../minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 
 typedef struct	s_rt
 {
