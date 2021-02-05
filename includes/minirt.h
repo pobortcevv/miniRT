@@ -6,22 +6,22 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/04 12:34:58 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/05 17:58:43 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -50,11 +50,13 @@ int			parse_camera(t_rt *rt);
 int			parse_light(t_rt *rt);
 int			parse_ambiant(t_rt *rt);
 int			parse_res(t_rt *rt);
+int			normal_check(t_xyz norm);
 int			dushnila_defence(char *line, int id);
 float		ft_dot(t_xyz *vec1, t_xyz *vec2);
 void		render(t_rt *rt);
 int			parse_plane(t_rt *rt);
 int			parse_square(t_rt *rt);
+int			parse_cylinder(t_rt *rt);
 t_xyz		normalize(t_xyz v);
 t_xyz		v_cross(t_xyz v1, t_xyz v2);
 t_xyz		v_new(t_xyz v1, t_xyz v2);
@@ -85,7 +87,7 @@ t_xyz		reflect_ray(t_xyz r, t_xyz norm);
 int			ft_split_size(char **split);
 void		close_hook(t_rt *rt);
 void		error_exit(t_rt *rt, char *error_name);
-void		error_parse(t_rt *rt, char *error_name, t_elem *elem);
-int		check_color_parse(t_color c);
+void		error_parse(t_rt *rt, char *error_name, void *elem, char **place_split);
+int			check_color_parse(t_color c);
 
 #endif

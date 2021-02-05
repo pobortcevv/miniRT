@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/04 14:24:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/05 20:19:27 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	return (0);
 }
 
+//int		intersect_cy(t_rt *rt, t_elem, t_xyz start, t_xyz finish)
+//{
+//	
+//}
+
 int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 {
 	float a;
@@ -85,6 +90,7 @@ int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 	tr->edge1 = v_new(tr->vertex1, tr->vertex0);
 	tr->edge2 = v_new(tr->vertex2, tr->vertex0);
 	tr->hight = v_cross(finish, tr->edge2);
+	tr->ori = v_cross(tr->edge2, tr->edge1);
 	a = ft_dot(&tr->edge1, &tr->hight);
 	if (a > -0.00001 && a < 0.00001) /*Рейкаст параллелен треугольнику*/
 		return (0);

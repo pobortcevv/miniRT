@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/04 12:33:09 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/05 17:56:01 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_cam
 typedef struct	s_amb
 {
 	float	ratio;
+	int		id;
 	t_color	color;
 }		t_amb;
 
@@ -75,6 +76,7 @@ typedef struct	s_elem
 	int	id;
 	
 	float	len;
+	float	cy_hight;
 	float	r;
 	float	n_dot_l;
 	float	r_dot_v;

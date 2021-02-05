@@ -6,53 +6,11 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 14:10:49 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/05 17:35:42 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-int		ft_split_size(char **split)
-{
-	int 	size;
-
-	size = -1;
-	while(split[++size]);
-	return(size);
-}
-
-int		dushnila_defence(char *line, int id)
-{
-	if (id == INT)
-	{
-		if (ft_charcnt(line, '-') > 1 || (ft_charcnt(line, '-') > 0 && line[0] != '-'))
-			return (0);
-		if (!(ft_inset(line, "-0123456789")))
-			return (0);
-	}
-	if (id == FLOAT)
-	{
-		if (ft_charcnt(line, '-') > 1 || (ft_charcnt(line, '-') > 0 && line[0] != '-'))
-			return (0);
-		if (ft_charcnt(line, '.') > 1 || (!(ft_isdigit(line[0])) && !(line[0] == '-')))
-			return (0);
-		if (!(ft_inset(line, "-0123456789.")))
-			return (0);
-	}
-	if (id == STRING)
-	{
-		if (ft_strncmp(line, "R", ft_strlen(line)) != 0 && ft_strncmp(line, "A", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "c", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "l", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "pl", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "sp", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "sq", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "cy", ft_strlen(line)) != 0
-			&& ft_strncmp(line, "tr", ft_strlen(line)) != 0)
-			return (0);
-	}
-	return (1);
-}
 
 int		ft_pars(t_rt *rt)
 {
@@ -82,9 +40,13 @@ int		ft_pars(t_rt *rt)
 			result = parse_square(rt);
 		if ((ft_strncmp(rt->split[0], "tr", ft_strlen(rt->split[0]))) == 0)
 			result = parse_triangle(rt);
+		if ((ft_strncmp(rt->split[0], "cy", ft_strlen(rt->split[0]))) == 0)
+			result = parse_cylinder(rt);
 		ft_free_mat(rt->split);
 		ft_free_line(rt->line);
 	}
+	if (rt->res.id == 0 || rt->amb.id == 0)
+		result = 0;
 	return (result);
 }
 

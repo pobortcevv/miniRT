@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:03:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 16:27:03 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/05 16:43:54 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ void	error_exit(t_rt *rt, char *error_name)
 	exit(EXIT_FAILURE);
 }
 
-void	error_parse(t_rt *rt, char *error_name, t_elem *elem)
+void	error_parse(t_rt *rt, char *error_name, void *elem, char **place_split)
 {
 	ft_printf("Error\n");
 	ft_putstr_fd(error_name, 2);
-	free(elem);
+	if (elem)
+		free(elem);
+	if (place_split)
+		ft_free_mat(place_split);
 	if (rt->split)
 		ft_free_mat(rt->split);
 	if (rt->line)
