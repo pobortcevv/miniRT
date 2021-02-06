@@ -13,15 +13,15 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-//# include "../minilibx-linux/mlx.h"
-//# include "../minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -31,6 +31,7 @@ typedef struct	s_rt
 	void	*mlx_win;
 	char	*line;
 	char	**split;
+	float	t;
 	float	t1;
 	float	t2;
 	float	closest_t;
@@ -78,6 +79,7 @@ t_color		c_multi(t_color c, float n);
 t_elem		*ft_lstcnt(t_list *list, int index);
 t_lgt		*ft_lstlgt(t_list *list, int index);
 void    	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish);
+void		intersect_cy(t_rt *rt, t_elem *cy, t_xyz start, t_xyz finish);
 int     	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish);
 int			intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish);
 void		intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish);

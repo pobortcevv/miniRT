@@ -27,6 +27,28 @@ void	intersect_sp(t_rt *rt, t_elem *sp, t_xyz start, t_xyz finish)
 	rt->t2 = ft_queq(k1, k2, k3, 2);
 }
 
+void	intersect_cy(t_rt *rt, t_elem *cy, t_xyz start, t_xyz finish)
+{
+	t_xyz	oc;
+	float	k1;
+	float	k2;
+	float	k3;
+
+	oc = v_new(start, cy->pos);
+	cy->ori = normalize(cy->ori);
+	k1 = ft_dot(&finish, &finish) - powf(ft_dot(&cy->ori, &finish), 2);
+	k2 = 2 * (ft_dot(&finish, &oc) - ft_dot(&cy->ori, &oc) * ft_dot(&cy->ori, &finish));
+	k3 = ft_dot(&oc, &oc) - powf(ft_dot(&cy->ori, &oc), 2) - powf(cy->r, 2);
+	rt->t1 = ft_queq(k1, k2, k3, 1);
+	rt->t2 = ft_queq(k1, k2, k3, 2);
+	cy->p = v_plus(start, v_multi(finish, rt->t1));
+	cy->p_2 = v_plus(start, v_multi(finish, rt->t2));
+	if (ft_dot(&cy->ori, &cy->p) < cy->cy_hight / -2 || ft_dot(&cy->ori, &cy->p) > cy->cy_hight / 2)
+		rt->t1 = INT_MAX;
+	if (ft_dot(&cy->ori, &cy->p_2) < cy->cy_hight / -2 || ft_dot(&cy->ori, &cy->p_2) > cy->cy_hight / 2)
+		rt->t2 = INT_MAX;
+}
+
 void	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish)
 {
 	t_xyz	co;
@@ -73,11 +95,6 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	return (0);
 }
 
-//int		intersect_cy(t_rt *rt, t_elem, t_xyz start, t_xyz finish)
-//{
-//	
-//}
-
 int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 {
 	float a;
@@ -119,5 +136,6 @@ void	intersect_init(t_rt *rt, t_elem *elem, t_xyz start, t_xyz finish)
 		intersect_sq(rt, elem, start, finish);
 	else if(elem->id == TRIANGLE)
 		intersect_tr(rt, elem, start, finish);
-
+	else if(elem->id == CYLINDER)
+		intersect_cy(rt, elem, start, finish);
 }

@@ -15,6 +15,7 @@
 
 # include "minirt.h"
 
+# define min(A, B) ((A) < (B) ? (A) : (B))
 # define SPHERE 1
 # define PLANE 2
 # define SQUARE 3
@@ -81,8 +82,11 @@ typedef struct	s_elem
 	float	n_dot_l;
 	float	r_dot_v;
 	float	a;
+	float	ck_1;
+	float	ck_2;
 	t_xyz	v_r;
 	t_xyz	p;
+	t_xyz	p_2;
 	t_xyz	l;
 	t_xyz	vertex0;
 	t_xyz	vertex1;

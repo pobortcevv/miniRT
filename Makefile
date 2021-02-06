@@ -45,13 +45,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)

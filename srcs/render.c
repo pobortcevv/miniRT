@@ -12,51 +12,16 @@
 
 #include "../includes/minirt.h"
 
-//int	check_tr(t_rt *rt, t_xyz hit, t_elem *tr)
-//{
-	//t_xyz	edge;
-	//t_xyz	tr_hit;
-	//t_xyz	h_cross;
-//
-	//tr_hit = v_new(hit, tr->a);
-	//edge = v_new(tr->b, tr->a);
-	//h_cross = cross(edge, tr_hit);
-	//if (ft_dot(&tr->ori, &h_cross) < 0)
-		//rt->t1 = INT_MAX;
-	//tr_hit = v_new(hit, tr->b);
-	//edge = v_new(tr->c, tr->b);
-	//h_cross = cross(edge, tr_hit);
-	//if (ft_dot(&tr->ori, &h_cross) < 0)
-		//rt->t1 = INT_MAX;
-	//tr_hit = v_new(hit, tr->c);
-	//edge = v_new(tr->a, tr->c);
-	//h_cross = cross(edge, tr_hit);
-	//if (ft_dot(&tr->ori, &h_cross) < 0)
-		//rt->t1 = INT_MAX;
-	//return (1);
-//}
-//
-//int	intersect_tr(t_rt *rt, t_elem *tr)
-//{
-	//float k1;
-	//float k2;
-	//t_xyz ac;
-	//t_xyz hit;
-//
-	//tr->ori = cross(v_new(tr->b, tr->a), v_new(tr->c, tr->a));
-	//normalize(&tr->ori);
-	//rt->t2 = INT_MAX;
-	//ac = v_new(rt->cam.pos, tr->a);
-	//k1 = ft_dot(&tr->ori, &ac);
-	//if (!(k2 = ft_dot(&tr->ori, &rt->cam.d)))
-	//{
-		//rt->t1 = INT_MAX;
-		//return (0);
-	//}
-	//rt->t1 = k1 / k2;
-	//hit = v_new(rt->cam.pos, v_multi(rt->cam.d, rt->t1));
-	//return (check_tr(rt, hit, tr));
-//}
+t_xyz	cylinder_normal(t_elem cy, t_xyz cp)
+{
+	t_xyz tau;
+	t_xyz norm;
+
+	tau = v_cross(cy.ori, cp);
+	tau = normalize(tau);
+	norm = v_cross(tau, cy.ori);
+	return (norm);
+}
 
 t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 {
@@ -70,6 +35,8 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
 	if (cl_elem->id == SPHERE)
 		cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
+	else if (cl_elem->id == CYLINDER)
+		cl_elem->norm = cylinder_normal(*cl_elem, v_new(cl_elem->p, cl_elem->pos));
 	else
 		cl_elem->norm = cl_elem->ori;
 	cl_elem->norm = normalize(cl_elem->norm);
