@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:17:38 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/01 16:35:17 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:00:21 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_check_file(char *file)
 
 int	start_rt(t_rt *rt)
 {
-	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "minirt");
+	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "miniRT");
 	render(rt);
-	//mlx_hook(rt->mlx_win, 17, 1L<<0, close, rt);
+	mlx_hook(rt->mlx_win, 17, 0, normal_exit, rt);
 
 	mlx_loop(rt->mlx);
 	return (1);

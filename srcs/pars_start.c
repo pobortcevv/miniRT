@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 17:35:42 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:13:08 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_pars(t_rt *rt)
 		if ((ft_strncmp(rt->split[0], "cy", ft_strlen(rt->split[0]))) == 0)
 			result = parse_cylinder(rt);
 		ft_free_mat(rt->split);
-		ft_free_line(rt->line);
+		ft_free_line(&rt->line);
 	}
 	if (rt->res.id == 0 || rt->amb.id == 0)
 		result = 0;

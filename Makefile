@@ -6,11 +6,11 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/02/05 15:17:13 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/07 15:00:07 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= minirt
+NAME		= miniRT
 
 SRCS		= srcs/main.c \
 		  srcs/pars_start.c \
@@ -45,13 +45,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)

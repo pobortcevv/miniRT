@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 20:19:27 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:39:54 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish)
 	if (k2 == 0)
 		rt->t1 = INT_MAX;
 	else
-		rt->t1 = (k1 / k2);
+		rt->t1 = k1 / k2;
 	rt->t2 = INT_MAX;
 }
 
@@ -84,7 +84,7 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 		rt->t1 = INT_MAX;
 		return (0);
 	}
-	rt->t1 = (k1 / k2);
+	rt->t1 = k1 / k2;
 	hit = v_new(v_multi(finish, rt->t1), sq->pos);
 	if (fabs(hit.x) <= (sq->len / 2) &&
 			fabs(hit.y) <= (sq->len / 2) &&
@@ -109,7 +109,7 @@ int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 	tr->hight = v_cross(finish, tr->edge2);
 	tr->ori = v_cross(tr->edge2, tr->edge1);
 	a = ft_dot(&tr->edge1, &tr->hight);
-	if (a > -0.00001 && a < 0.00001) /*Рейкаст параллелен треугольнику*/
+	if (a > -EPSILON && a < EPSILON) /*Рейкаст параллелен треугольнику*/
 		return (0);
 	tr->s = v_new(start, tr->vertex0);
 	f = 1 / a;
@@ -121,7 +121,7 @@ int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)
 	if (v < 0 || v + u > 1)
 		return (0);
 	rt->t1 = f * ft_dot(&tr->edge2, &tr->q);
-	if (rt->t1 <= 0.00001)
+	if (rt->t1 <= EPSILON)
 		rt->t1 = INT_MAX;
 	return (1);
 }

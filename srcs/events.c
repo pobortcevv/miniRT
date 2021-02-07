@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:03:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 16:43:54 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 14:53:13 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	error_parse(t_rt *rt, char *error_name, void *elem, char **place_split)
 	if (rt->split)
 		ft_free_mat(rt->split);
 	if (rt->line)
-		ft_free_line(rt->line);
+		ft_free_line(&rt->line);
 	if (rt->ob_lst)
 		ft_lstclear(&rt->ob_lst, free);
 	if (rt->lgt_lst)
@@ -46,4 +46,15 @@ void	error_parse(t_rt *rt, char *error_name, void *elem, char **place_split)
 	if (rt->mlx_win)
 		mlx_destroy_window(rt->mlx, rt->mlx_win);
 	exit(EXIT_FAILURE);
+}
+
+int		normal_exit(t_rt *rt)
+{
+	if (rt->ob_lst)
+		ft_lstclear(&rt->ob_lst, free);
+	if (rt->lgt_lst)
+		ft_lstclear(&rt->lgt_lst, free);
+	mlx_destroy_window(rt->mlx, rt->mlx_win);
+	exit(EXIT_SUCCESS);
+	return (1);
 }

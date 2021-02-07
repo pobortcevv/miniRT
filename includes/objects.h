@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 17:56:01 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:17:48 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "minirt.h"
 
-# define min(A, B) ((A) < (B) ? (A) : (B))
 # define SPHERE 1
 # define PLANE 2
 # define SQUARE 3
@@ -27,6 +26,12 @@
 # define STRING 13
 # define START_RAY 14
 # define MIRROR 15
+# define EPSILON 0.001
+# define CAMERA_START 0
+# define REFLECTION_RATE 0.6
+# define MIRRORING_DEPTH_VALUE 3
+# define BRIGHT_RATE 100
+
 
 typedef struct	s_xyz
 {

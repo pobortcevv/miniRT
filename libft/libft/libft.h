@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 15:39:34 by sabra             #+#    #+#             */
-/*   Updated: 2021/01/17 13:29:15 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 12:38:26 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ t_struct		ft_minus_init(t_struct flgs);
 t_struct		ft_width_init(const char *str, t_struct flgs, int i, va_list args);
 t_struct		ft_dot_star_init(const char *str, t_struct flgs, int i, va_list
 args);
-void			ft_free_mat(char **mat);
-void			ft_free_line(char *line);
+char			**ft_free_mat(char **mat);
+void			ft_free_line(char **line);
 void			*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);

@@ -6,22 +6,22 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 17:58:43 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:02:33 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -90,6 +90,7 @@ int			ft_split_size(char **split);
 void		close_hook(t_rt *rt);
 void		error_exit(t_rt *rt, char *error_name);
 void		error_parse(t_rt *rt, char *error_name, void *elem, char **place_split);
+int			normal_exit(t_rt *rt);
 int			check_color_parse(t_color c);
 
 #endif
