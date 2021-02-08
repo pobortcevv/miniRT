@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 15:32:19 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 21:14:28 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_xyz	cylinder_normal(t_elem cy, t_xyz cp)
 	t_xyz norm;
 
 	tau = v_cross(cy.ori, cp);
-	tau = normalize(tau);
-	norm = v_cross(tau, cy.ori);
+	normalize(&tau);
+	norm = v_cross(tau, cy.ori); 
 	return (norm);
 }
 
@@ -39,7 +39,7 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->norm = cylinder_normal(*cl_elem, v_new(cl_elem->p, cl_elem->pos));
 	else
 		cl_elem->norm = cl_elem->ori;
-	cl_elem->norm = normalize(cl_elem->norm);
+	normalize(&cl_elem->norm);
 	light += rt->amb.ratio;
 	result = c_one();
 	color_ambiant(&result, rt->amb.color);

@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 14:14:15 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 21:15:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.001 && rt->t1 < 1)
+		if (rt->t1 >= 0.00001 && rt->t1 < 1)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.001 && rt->t2 < 1)
+		if (rt->t2 >= 0.00001 && rt->t2 < 1)
 			closest_t = rt->t2;
 		i++;
 	}
@@ -43,6 +43,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 	float	vw;
 	float	vh;
 
+	normalize(&rt->cam.ori);
 	vw = 2 * tan(rt->cam.fov / 2);
 	vh = 2 * tan(rt->cam.fov / 2);
 	scale_w = vw / rt->res.y;

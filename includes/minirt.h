@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 15:02:33 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 21:10:30 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		render(t_rt *rt);
 int			parse_plane(t_rt *rt);
 int			parse_square(t_rt *rt);
 int			parse_cylinder(t_rt *rt);
-t_xyz		normalize(t_xyz v);
+void		normalize(t_xyz *v);
 t_xyz		v_cross(t_xyz v1, t_xyz v2);
 t_xyz		v_new(t_xyz v1, t_xyz v2);
 t_xyz		v_multi(t_xyz v, float n);

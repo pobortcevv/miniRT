@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 13:13:08 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 17:55:26 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int		ft_pars(t_rt *rt)
 	while (get_next_line(rt->fd, &(rt->line)) == 1 && result)
 	{
 		if (*(rt->line) == '\0')
+		{
+				ft_free_line(&rt->line);
 				continue;
+		}
 		rt->split = ft_split(rt->line, ' ');
 		if (dushnila_defence(rt->split[0], STRING) == 0)
 			result = 0;

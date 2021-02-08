@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 15:39:54 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 21:12:50 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	intersect_cy(t_rt *rt, t_elem *cy, t_xyz start, t_xyz finish)
 	float	k3;
 
 	oc = v_new(start, cy->pos);
-	cy->ori = normalize(cy->ori);
+	normalize(&cy->ori);
 	k1 = ft_dot(&finish, &finish) - powf(ft_dot(&cy->ori, &finish), 2);
 	k2 = 2 * (ft_dot(&finish, &oc) - ft_dot(&cy->ori, &oc) * ft_dot(&cy->ori, &finish));
 	k3 = ft_dot(&oc, &oc) - powf(ft_dot(&cy->ori, &oc), 2) - powf(cy->r, 2);
@@ -57,7 +57,7 @@ void	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish)
 
 
 	co = v_new(pl->pos, start);
-	pl->ori = normalize(pl->ori);
+	normalize(&pl->ori);
 	k1 = ft_dot(&pl->ori, &co);
 	k2 = ft_dot(&pl->ori, &finish);
 	if (k2 == 0)
@@ -75,8 +75,8 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	float	k2;
 
 	co = v_new(sq->pos, start);
-	sq->ori = normalize(sq->ori);
-	k1 = ft_dot(&(sq->ori), &co);
+	normalize(&sq->ori);
+	k1 = ft_dot(&sq->ori, &co);
 	rt->t2 = INT_MAX;
 	k2 = ft_dot(&finish, &sq->ori);
 	if (k2 == 0)
@@ -89,10 +89,10 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 	if (fabs(hit.x) <= (sq->len / 2) &&
 			fabs(hit.y) <= (sq->len / 2) &&
 			fabs(hit.z) <= (sq->len / 2))
-		return (1);
+		return (0);
 	else
 		rt->t1 = INT_MAX;
-	return (0);
+	return (1);
 }
 
 int		intersect_tr(t_rt *rt, t_elem *tr, t_xyz start, t_xyz finish)

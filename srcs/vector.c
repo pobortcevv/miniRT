@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:22:24 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 15:16:51 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/08 21:14:18 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ float	v_len(t_xyz v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-t_xyz	normalize(t_xyz v)
+void	normalize(t_xyz *v)
 {
 	float len;
-	t_xyz res;
 
-	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-	res.x = v.x / len;
-	res.y = v.y / len;
-	res.z = v.z / len;
-	return (res);
+	len = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	v->x /= len;
+	v->y /= len;
+	v->z /= len;
 }
 
 t_xyz	v_cross(t_xyz v1, t_xyz v2)
