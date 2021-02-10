@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/02/07 15:00:07 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/10 19:16:16 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS		= srcs/main.c \
 		  srcs/lists_utils.c \
 		  srcs/intersect_objects.c \
 		  srcs/math.c \
+		  srcs/matrix.c \
 		  srcs/hooks.c \
 		  srcs/events.c \
 

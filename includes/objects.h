@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/08 20:37:12 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/10 19:48:24 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define EPSILON 0.001
 # define CAMERA_START 0
 # define REFLECTION_RATE 0.6
-# define MIRRORING_DEPTH_VALUE 3
+# define MIRRORING_DEPTH_VALUE 0
 # define BRIGHT_RATE 100
 
 

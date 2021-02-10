@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/08 21:15:16 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/10 20:37:17 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 
 	closest_t = INT_MAX;
 	i = 0;
+	rt->t1 = INT_MAX;
+	rt->t2 = INT_MAX;
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
@@ -44,6 +46,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 	float	vh;
 
 	normalize(&rt->cam.ori);
+	//rt->cam.pos = rotate_scene(rt->cam.pos, rotation_matrix(rt->cam.ori));
 	vw = 2 * tan(rt->cam.fov / 2);
 	vh = 2 * tan(rt->cam.fov / 2);
 	scale_w = vw / rt->res.y;

@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/08 21:10:30 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/10 19:24:47 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ void		error_exit(t_rt *rt, char *error_name);
 void		error_parse(t_rt *rt, char *error_name, void *elem, char **place_split);
 int			normal_exit(t_rt *rt);
 int			check_color_parse(t_color c);
+t_xyz		rotate_scene(t_xyz c_pos, float **r_m);
+float 		**rotation_matrix(t_xyz ori);
 
 #endif
