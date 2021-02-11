@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/10 20:37:17 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/11 16:28:46 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.00001 && rt->t1 < 1)
+		if (rt->t1 >= 0.0001 && rt->t1 < 1)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.00001 && rt->t2 < 1)
+		if (rt->t2 >= 0.0001 && rt->t2 < 1)
 			closest_t = rt->t2;
 		i++;
 	}
@@ -42,16 +42,18 @@ void	to_viewport(int x, int y, t_rt *rt)
 {
 	float	scale_w;
 	float	scale_h;
-	float	vw;
-	float	vh;
 
 	normalize(&rt->cam.ori);
-	//rt->cam.pos = rotate_scene(rt->cam.pos, rotation_matrix(rt->cam.ori));
-	vw = 2 * tan(rt->cam.fov / 2);
-	vh = 2 * tan(rt->cam.fov / 2);
-	scale_w = vw / rt->res.y;
-	scale_h = vh / rt->res.y;
-	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
-	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.y;
+	scale_w = 2 * tan((rt->cam.fov / 2)) / rt->res.y;
+	scale_h = 2 * tan(rt->cam.fov / 2) / rt->res.y;
+	rt->cam.d.x = scale_w * (x - (rt->res.x / 2));
+	rt->cam.d.y = scale_h * (rt->res.y / 2 - y);
 	rt->cam.d.z = 1;
+	//rt->cam.d.x = x - rt->res.x / 2;
+	//rt->cam.d.y = rt->res.y / 2 - y;
+	//rt->cam.d.z = -(rt->res.y / 2) / tan(rt->cam.fov / 2);
+	//rt->cam.d = rotate_scene(rt->cam.d, rotation_matrix(rt->cam.ori));
+	//rt->cam.d = v_new(rt->cam.d, rt->cam.pos);
+	rt->cam.d.x -= rt->cam.pos.x;
+	rt->cam.d.y -= rt->cam.pos.y;
 }

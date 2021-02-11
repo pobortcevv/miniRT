@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 14:30:08 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/11 16:20:42 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish)
 	normalize(&pl->ori);
 	k1 = ft_dot(&pl->ori, &co);
 	k2 = ft_dot(&pl->ori, &finish);
-	if (k2 == 0)
+	if (k2 > 1e-6)
 		rt->t1 = INT_MAX;
 	else
 		rt->t1 = k1 / k2;
