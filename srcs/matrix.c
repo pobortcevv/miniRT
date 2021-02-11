@@ -97,8 +97,6 @@ float **rotation_matrix(t_xyz ori)
 	float sin_a;
 
 	normalize(&ori);
-	//if (v_len(ori) == 0)
-		//return ;
 	cos_a = ori.x;
 	sin_a = sqrt(1 - cos_a * cos_a);
 	x_m = x_matrix(cos_a, sin_a);
@@ -136,14 +134,3 @@ t_xyz	rotate_scene(t_xyz c_pos, float **r_m)
 	ft_free_float_mat(r_m);
 	return (c_pos);
 }
-//
-//int main (void)
-//{
-	//t_xyz ori = {0.3, 0.5, 0.0};
-	//t_xyz pos = {5, 4, 7};
-	//float **result;
-//
-	//result = rotation_matrix(ori);
-	//pos = rotate_scene(pos, result);
-	//sleep(1000);
-//}

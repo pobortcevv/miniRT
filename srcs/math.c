@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 16:28:46 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/11 16:55:45 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 {
 	float	scale_w;
 	float	scale_h;
+	float	**rotation_m;
 
 	normalize(&rt->cam.ori);
 	scale_w = 2 * tan((rt->cam.fov / 2)) / rt->res.y;
@@ -56,4 +57,5 @@ void	to_viewport(int x, int y, t_rt *rt)
 	//rt->cam.d = v_new(rt->cam.d, rt->cam.pos);
 	rt->cam.d.x -= rt->cam.pos.x;
 	rt->cam.d.y -= rt->cam.pos.y;
+	rotation_m = rotation_matrix(rt->cam.ori);
 }
