@@ -85,13 +85,24 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 		return (0);
 	}
 	rt->t1 = k1 / k2;
-	hit = v_new(sq->pos, v_multi(finish, rt->t1));
-	if (fabs(hit.x) <= (sq->len / 2) &&
-			fabs(hit.y) <= (sq->len / 2) &&
-			fabs(hit.z) <= (sq->len / 2))
-		return (0);
-	else
+	//if (rt->t1 < 0)
+		//return (0);
+	hit = v_new(start, v_multi(finish, rt->t1));
+	if (fabs(hit.x - sq->pos.x) > (sq->len / 2))
+	{
 		rt->t1 = INT_MAX;
+		return (0);
+	}
+	if(fabs(hit.y - sq->pos.y) > (sq->len / 2))
+	{
+		rt->t1 = INT_MAX;
+		return (0);
+	}
+	if (fabs(hit.z - sq->pos.z) > (sq->len / 2))
+	{
+		rt->t1 = INT_MAX;
+		return (0);
+	}
 	return (1);
 }
 

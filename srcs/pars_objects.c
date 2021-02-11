@@ -23,10 +23,7 @@ int		parse_ambiant(t_rt *rt)
 
 	if (ft_charcnt(rt->split[2], ',') != 2 || ft_split_size(rt->split) != 3)
 		return (0);
-	place_split = ft_split(rt->split[2], ',');
-	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
-			!dushnila_defence(place_split[2], FLOAT)
-			|| !dushnila_defence(rt->split[1], FLOAT))
+	place_split = ft_split(rt->split[2], ','); if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) || !dushnila_defence(place_split[2], FLOAT) || !dushnila_defence(rt->split[1], FLOAT))
 		return (0);
 	rt->amb.color.b = ft_atof(place_split[0]);
 	rt->amb.color.g = ft_atof(place_split[1]);
