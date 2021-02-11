@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:16:31 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/10 20:36:42 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/11 14:30:08 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,11 @@ int	intersect_sq(t_rt *rt, t_elem *sq, t_xyz start, t_xyz finish)
 		return (0);
 	}
 	rt->t1 = k1 / k2;
-	//if (rt->t1 < 0)
-		//return (0);
-	hit = v_new(start, v_multi(finish, rt->t1));
-	if (fabs(hit.x - sq->pos.x) > (sq->len / 2))
-	{
+	hit = v_plus(start, v_multi(finish, rt->t1));
+	if ((fabs(hit.x - sq->pos.x) > (sq->len / 2)
+				|| (fabs(hit.y - sq->pos.y) > (sq->len / 2)
+				|| (fabs(hit.z - sq->pos.z) > (sq->len / 2)))))
 		rt->t1 = INT_MAX;
-		return (0);
-	}
-	if(fabs(hit.y - sq->pos.y) > (sq->len / 2))
-	{
-		rt->t1 = INT_MAX;
-		return (0);
-	}
-	if (fabs(hit.z - sq->pos.z) > (sq->len / 2))
-	{
-		rt->t1 = INT_MAX;
-		return (0);
-	}
 	return (1);
 }
 

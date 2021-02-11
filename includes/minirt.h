@@ -6,22 +6,22 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/10 19:24:47 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/11 13:36:57 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 typedef struct	s_rt
 {
