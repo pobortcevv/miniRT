@@ -131,6 +131,6 @@ t_xyz	rotate_scene(t_xyz c_pos, float **r_m)
 	c_pos.x = res[0];
 	c_pos.y = res[1];
 	c_pos.z = res[2];
-	ft_free_float_mat(r_m);
+	//ft_free_float_mat(r_m);
 	return (c_pos);
 }

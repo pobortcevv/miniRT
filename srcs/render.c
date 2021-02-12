@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 16:19:10 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/12 19:11:56 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,13 @@ void	render(t_rt *rt)
 	int		x;
 	int	 	y;
 	t_color		color;
+	float	**rotation_m;
 
 	x = 0;
+	normalize(&rt->cam.ori);
+	rotation_m = rotation_matrix(rt->cam.ori);
+	cam_to_world(rt, rotation_m, &rt->cam);
+	//change_frame(rt, &rt->cam);
 	while (x < rt->res.x)
 	{
 		y = 0;
