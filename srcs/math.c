@@ -42,7 +42,7 @@ void	to_viewport(int x, int y, t_rt *rt)
 {
 	float	scale_w;
 	float	scale_h;
-	float	**rotation_m;
+	//float	**rotation_m;
 
 	normalize(&rt->cam.ori);
 	scale_w = 2 * tan((rt->cam.fov / 2)) / rt->res.y;
@@ -57,5 +57,5 @@ void	to_viewport(int x, int y, t_rt *rt)
 	//rt->cam.d = v_new(rt->cam.d, rt->cam.pos);
 	rt->cam.d.x -= rt->cam.pos.x;
 	rt->cam.d.y -= rt->cam.pos.y;
-	rotation_m = rotation_matrix(rt->cam.ori);
+	//rotation_m = rotation_matrix(rt->cam.ori);
 }
