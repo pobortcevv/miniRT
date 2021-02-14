@@ -20,6 +20,8 @@ void	error_exit(t_rt *rt, char *error_name)
 		free(rt->closest_elem);
 	if (rt->ob_lst)
 		ft_lstclear(&rt->ob_lst, free);
+	if (rt->cmr_lst)
+		ft_lstclear(&rt->cmr_lst, free);
 	if (rt->lgt_lst)
 		ft_lstclear(&rt->lgt_lst, free);
 	if (rt->mlx_win)
@@ -41,6 +43,8 @@ void	error_parse(t_rt *rt, char *error_name, void *elem, char **place_split)
 		ft_free_line(&rt->line);
 	if (rt->ob_lst)
 		ft_lstclear(&rt->ob_lst, free);
+	if (rt->cmr_lst)
+		ft_lstclear(&rt->cmr_lst, free);
 	if (rt->lgt_lst)
 		ft_lstclear(&rt->lgt_lst, free);
 	if (rt->mlx_win)
@@ -54,6 +58,8 @@ int		normal_exit(t_rt *rt)
 		ft_lstclear(&rt->ob_lst, free);
 	if (rt->lgt_lst)
 		ft_lstclear(&rt->lgt_lst, free);
+	if (rt->cmr_lst)
+		ft_lstclear(&rt->cmr_lst, free);
 	mlx_destroy_window(rt->mlx, rt->mlx_win);
 	exit(EXIT_SUCCESS);
 	return (1);

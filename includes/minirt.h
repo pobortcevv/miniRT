@@ -27,6 +27,7 @@ typedef struct	s_rt
 {
 	int	fd;
 	int	depth;
+	int	cam_count;
 	void	*mlx;
 	void	*mlx_win;
 	char	*line;
@@ -37,11 +38,10 @@ typedef struct	s_rt
 	float	closest_t;
 	t_elem	*closest_elem;
 	t_res	res;
-	t_cam	cam;
 	t_amb	amb;
 	t_list	*ob_lst;
 	t_list	*lgt_lst;
-	
+	t_list	*cmr_lst;
 }		t_rt; 
 
 int			ft_pars(t_rt *rt);

@@ -60,7 +60,6 @@ typedef struct	s_cam
 	t_xyz	pos;
 	t_xyz	ori;
 	float	fov;
-	int	num;
 }		t_cam;
 
 typedef struct	s_amb

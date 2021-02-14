@@ -48,7 +48,7 @@ int		ft_pars(t_rt *rt)
 		ft_free_mat(rt->split);
 		ft_free_line(&rt->line);
 	}
-	if (rt->res.id == 0 || rt->amb.id == 0)
+	if (rt->res.id == 0 || rt->amb.id == 0 || rt->cam_count == 0)
 		result = 0;
 	return (result);
 }
