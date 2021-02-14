@@ -121,7 +121,6 @@ void	render(t_rt *rt)
 	normalize(&rt->cam.ori);
 	rotation_m = rotation_matrix(rt->cam.ori);
 	cam_to_world(rt, rotation_m, &rt->cam);
-	//change_frame(rt, &rt->cam);
 	while (x < rt->res.x)
 	{
 		y = 0;
@@ -135,4 +134,5 @@ void	render(t_rt *rt)
 		}
 		x++;
 	}
+	ft_free_float_mat(rotation_m);
 }

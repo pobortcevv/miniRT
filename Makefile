@@ -36,7 +36,7 @@ OBJS		= $(SRCS:.c=.o)
 MINILIBX_DIR 	= minilibx-linux/
 CC			= gcc 
 RM			= rm -f
-CFLAGS		= -Wall -Wextra -Werror -g -ggdb3
+CFLAGS		= -Wall -Wextra -g -ggdb3
 LIBFT_DIR	= ./libft/libft/
 LIBS		= -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -L/usr/lib -lX11 -lXext -lm
 LIBS_MAC	= -L$(LIBFT_DIR) -lft -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit 
@@ -47,13 +47,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)

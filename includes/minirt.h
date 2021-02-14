@@ -13,15 +13,15 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-//# include "../minilibx-linux/mlx.h"
-//# include "../minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -96,5 +96,6 @@ t_xyz		rotate_scene(t_xyz c_pos, float **r_m);
 float 		**rotation_matrix(t_xyz ori);
 void		cam_to_world(t_rt *rt, float **rotation_m, t_cam *cam);
 void		change_frame(t_rt *rt, t_cam *cam);
+float		**ft_free_float_mat(float **m);
 
 #endif

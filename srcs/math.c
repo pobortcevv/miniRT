@@ -40,22 +40,11 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 
 void	to_viewport(int x, int y, t_rt *rt)
 {
-	float	scale_w;
-	float	scale_h;
-	//float	**rotation_m;
+	float	scale;
 
-	normalize(&rt->cam.ori);
-	//rotation_m = rotation_matrix(rt->cam.ori);
-	//cam_to_world(rt, rotation_m, &rt->cam);
-	//change_frame(rt, &rt->cam);
-	scale_w = 2 * tan((rt->cam.fov / 2)) / rt->res.y;
-	scale_h = 2 * tan(rt->cam.fov / 2) / rt->res.y;
-	rt->cam.d.x = scale_w * (x - (rt->res.x / 2)) - rt->cam.pos.x;
-	rt->cam.d.y = scale_h * (rt->res.y / 2 - y) - rt->cam.pos.x;
+	scale = 2 * tan(rt->cam.fov / 2) / rt->res.x;
+	rt->cam.d.x = scale * (x - (rt->res.x / 2)) - rt->cam.pos.x;
+	rt->cam.d.y = scale * (rt->res.y / 2 - y) - rt->cam.pos.x;
 	rt->cam.d.z = 1;
-	//rt->cam.d.x = x - rt->res.x / 2;
-	//rt->cam.d.y = rt->res.y / 2 - y;
-	//rt->cam.d.z = -(rt->res.y / 2) / tan(rt->cam.fov / 2);
-	//rt->cam.d = rotate_scene(rt->cam.d, rotation_matrix(rt->cam.ori));
-	//rt->cam.d = v_new(rt->cam.d, rt->cam.pos);
+	normalize(&rt->cam.d);
 }
