@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:03:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/08 17:59:07 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 18:41:51 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,42 @@ int		normal_exit(t_rt *rt)
 		ft_lstclear(&rt->cmr_lst, free);
 	mlx_destroy_window(rt->mlx, rt->mlx_win);
 	exit(EXIT_SUCCESS);
+	return (1);
+}
+
+int		change_cam(int keycode, t_rt *rt)
+{
+	int cam_id;
+
+	if (keycode == 8)
+	{
+	
+		mlx_clear_window(rt->mlx, rt->mlx_win);
+		close(rt->fd);
+		if ((rt->fd = open(rt->file_name, O_RDONLY)) == -1)
+			error_exit(rt, "OPEN FILE ERROR\n");
+		cam_id = rt->cam.id + 1;
+		rt->cam_count = 0;
+		rt->res.id = 0;
+		rt->amb.id = 0;
+		if (rt->ob_lst)
+			ft_lstclear(&rt->ob_lst, free);
+		if (rt->cmr_lst)
+			ft_lstclear(&rt->cmr_lst, free);
+		if (rt->lgt_lst)
+			ft_lstclear(&rt->lgt_lst, free);
+		
+		ft_pars(rt);
+		if (cam_id < rt->cam_count)
+		{
+			rt->cam = *ft_lstcam(rt->cmr_lst, cam_id);
+			render(rt);
+		}
+		else
+		{
+			rt->cam = *ft_lstcam(rt->cmr_lst, 0);
+			render(rt);
+		}
+	}
 	return (1);
 }

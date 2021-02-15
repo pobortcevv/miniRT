@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:42:15 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/08 17:55:26 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 18:32:50 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_pars(t_rt *rt)
 		ft_free_mat(rt->split);
 		ft_free_line(&rt->line);
 	}
-	if (rt->res.id == 0 || rt->amb.id == 0 || rt->cam_count == 0)
+	if (rt->res.id != 1 || rt->amb.id != 1 || rt->cam_count == 0)
 		result = 0;
 	return (result);
 }

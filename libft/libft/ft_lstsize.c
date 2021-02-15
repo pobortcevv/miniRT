@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 16:39:39 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 16:56:29 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 16:34:42 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int		ft_lstsize(t_list *lst)
 	len = 0;
 	if (!lst)
 		return (0);
-	while (list)
+	while (list->next != NULL)
 	{
 		list = list->next;
 		len++;
 	}
+	if (list->next == NULL)
+		len++;
 	return (len);
 }

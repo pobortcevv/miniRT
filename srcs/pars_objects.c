@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 17:16:29 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 16:54:36 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int		parse_camera(t_rt *rt)
 	ft_free_mat(place_split);
 	if((cam->fov = ft_atof(rt->split[3]) * (3.14/180)) < 0)
 		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
+	cam->id = rt->cam_count;
 	rt->cam_count += 1;
 	ft_lstadd_back(&rt->cmr_lst, ft_lstnew(cam));
 	return (1);

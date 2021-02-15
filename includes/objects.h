@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/12 15:22:17 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 17:37:00 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_cam
 	t_xyz	pos;
 	t_xyz	ori;
 	float	fov;
+	int		id;
 }		t_cam;
 
 typedef struct	s_amb

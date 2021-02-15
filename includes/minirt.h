@@ -6,31 +6,32 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/12 14:59:13 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 17:36:23 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 typedef struct	s_rt
 {
-	int	fd;
-	int	depth;
-	int	cam_count;
+	int		fd;
+	int		depth;
+	int		cam_count;
 	void	*mlx;
 	void	*mlx_win;
 	char	*line;
+	char	*file_name;
 	char	**split;
 	float	t;
 	float	t1;
@@ -99,5 +100,6 @@ float 		**rotation_matrix(t_xyz ori);
 void		cam_to_world(t_rt *rt, float **rotation_m, t_cam *cam);
 void		change_frame(t_rt *rt, t_cam *cam);
 float		**ft_free_float_mat(float **m);
+int			change_cam(int keycode, t_rt *rt);
 
 #endif

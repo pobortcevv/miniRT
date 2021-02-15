@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:17:38 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/07 15:00:21 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/15 18:41:54 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	start_rt(t_rt *rt)
 	rt->cam = *ft_lstcam(rt->cmr_lst, 0);
 	render(rt);
 	mlx_hook(rt->mlx_win, 17, 0, normal_exit, rt);
-
+	mlx_key_hook(rt->mlx_win, change_cam, rt);
 	mlx_loop(rt->mlx);
 	return (1);
 }
@@ -45,6 +45,7 @@ int	main(int ac, char **av)
 		error_exit(&rt, "ARGUMENTS ERROR\n");
 	if (!(rt.fd = open(av[1], O_RDONLY)))
 		error_exit(&rt, "OPEN FILE ERROR\n");
+	rt.file_name = av[1];
 	if (ft_pars(&rt) != 1)
 		error_exit(&rt, "PARSER ERROR\n");
 	ft_putstr_fd("everything ok\n", 1);
