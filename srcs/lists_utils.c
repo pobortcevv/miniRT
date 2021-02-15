@@ -47,3 +47,22 @@ t_elem	*ft_lstcnt(t_list *list, int index)
 	}
 	return (elem);
 }
+
+
+t_cam	*ft_lstcam(t_list *list, int index)
+{
+	int i;
+	t_list *lst;
+	t_cam *cam;
+
+	lst = list;
+	cam = lst->content;
+	i = 0;
+	while (i != index)
+	{
+		lst = lst->next;
+		cam = lst->content;
+		i++;
+	}
+	return (cam);
+}

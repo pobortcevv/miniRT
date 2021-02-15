@@ -26,6 +26,7 @@ int	ft_check_file(char *file)
 int	start_rt(t_rt *rt)
 {
 	rt->mlx_win = mlx_new_window(rt->mlx, rt->res.x, rt->res.y, "miniRT");
+	rt->cam = *ft_lstcam(rt->cmr_lst, 0);
 	render(rt);
 	mlx_hook(rt->mlx_win, 17, 0, normal_exit, rt);
 

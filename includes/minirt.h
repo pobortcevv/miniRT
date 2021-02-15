@@ -37,6 +37,7 @@ typedef struct	s_rt
 	float	t2;
 	float	closest_t;
 	t_elem	*closest_elem;
+	t_cam	cam;
 	t_res	res;
 	t_amb	amb;
 	t_list	*ob_lst;
@@ -77,6 +78,7 @@ int			c_isnull(t_color c);
 t_color		c_multi_colors(t_color c1, t_color c2);
 t_color		c_multi(t_color c, float n);
 t_elem		*ft_lstcnt(t_list *list, int index);
+t_cam		*ft_lstcam(t_list *list, int index);
 t_lgt		*ft_lstlgt(t_list *list, int index);
 void    	intersect_pl(t_rt *rt, t_elem *pl, t_xyz start, t_xyz finish);
 void		intersect_cy(t_rt *rt, t_elem *cy, t_xyz start, t_xyz finish);

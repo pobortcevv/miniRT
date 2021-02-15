@@ -119,7 +119,7 @@ int		parse_camera(t_rt *rt)
 	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT)
 			|| !dushnila_defence(rt->split[3], INT))
-		error_parse(rt, "CAMERA INFO ERROR\n", pl, place_split);
+		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
 	cam->pos.x = ft_atof(place_split[0]);
 	cam->pos.y = ft_atof(place_split[1]);
 	cam->pos.z = ft_atof(place_split[2]);
@@ -127,13 +127,13 @@ int		parse_camera(t_rt *rt)
 	place_split = ft_split(rt->split[2], ',');
 	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
-		error_parse(rt, "CAMERA INFO ERROR\n", pl, place_split);
+		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
 	cam->ori.x = ft_atof(place_split[0]);
 	cam->ori.y = ft_atof(place_split[1]);
 	cam->ori.z = ft_atof(place_split[2]);
 	ft_free_mat(place_split);
-	if((rt->cam.fov = ft_atof(rt->split[3]) * (3.14/180)) < 0)
-		error_parse(rt, "CAMERA INFO ERROR\n", pl, place_split);
+	if((cam->fov = ft_atof(rt->split[3]) * (3.14/180)) < 0)
+		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
 	rt->cam_count += 1;
 	ft_lstadd_back(&rt->cmr_lst, ft_lstnew(cam));
 	return (1);
