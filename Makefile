@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/02/15 15:35:36 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/16 13:57:29 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS		= srcs/main.c \
 		  srcs/matrix.c \
 		  srcs/hooks.c \
 		  srcs/events.c \
+		  srcs/create_bmp.c \
 		  srcs/cam_to_world.c \
 
 

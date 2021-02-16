@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/15 17:36:23 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/16 13:38:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void		cam_to_world(t_rt *rt, float **rotation_m, t_cam *cam);
 void		change_frame(t_rt *rt, t_cam *cam);
 float		**ft_free_float_mat(float **m);
 int			change_cam(int keycode, t_rt *rt);
+int			create_bmp(t_rt *rt);
 
 #endif

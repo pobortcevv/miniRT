@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:17:38 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/15 18:41:54 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/16 13:57:32 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,21 @@ int	main(int ac, char **av)
 {
 	t_rt	rt;
 
-	ft_bzero(&rt, sizeof(t_rt));
-	if(!(rt.mlx = mlx_init()))
-		error_exit(&rt, "MLX ERROR\n");
-	if (ac > 3 || ac == 1 || (ac == 2 && !ft_check_file(av[1])))
-		error_exit(&rt, "ARGUMENTS ERROR\n");
-	if (!(rt.fd = open(av[1], O_RDONLY)))
-		error_exit(&rt, "OPEN FILE ERROR\n");
-	rt.file_name = av[1];
-	if (ft_pars(&rt) != 1)
-		error_exit(&rt, "PARSER ERROR\n");
-	ft_putstr_fd("everything ok\n", 1);
-	start_rt(&rt);
-	return (1);
+	if (ac == 2 && ft_check_file(av[1]))
+	{
+		ft_bzero(&rt, sizeof(t_rt));
+		if(!(rt.mlx = mlx_init()))
+			error_exit(&rt, "MLX ERROR\n");
+		if (!(rt.fd = open(av[1], O_RDONLY)))
+			error_exit(&rt, "OPEN FILE ERROR\n");
+		rt.file_name = av[1];
+		if (ft_pars(&rt) != 1)
+			error_exit(&rt, "PARSER ERROR\n");
+		ft_putstr_fd("everything ok\n", 1);
+		if(ac == 3 && ft_check_file(av[1]) && ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
+			create_bmp(&rt);
+		start_rt(&rt);
+	}
+	error_exit(&rt, "ARGUMENTS ERROR\n");
+	return (0);
 }
