@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:00:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/15 17:37:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/16 16:33:02 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define REFLECTION_RATE 0.6
 # define MIRRORING_DEPTH_VALUE 3
 # define BRIGHT_RATE 100
-
+# define C_KEY 8
+# define ESC_KEY 53
 
 typedef struct	s_xyz
 {

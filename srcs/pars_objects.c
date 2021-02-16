@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:45:37 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/15 16:54:36 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/16 16:24:27 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,17 +123,17 @@ int		parse_camera(t_rt *rt)
 	cam->pos.x = ft_atof(place_split[0]);
 	cam->pos.y = ft_atof(place_split[1]);
 	cam->pos.z = ft_atof(place_split[2]);
-	ft_free_mat(place_split);
-	place_split = ft_split(rt->split[2], ',');
 	if (ft_split_size(place_split) != 3 || !dushnila_defence(place_split[0], FLOAT) || !dushnila_defence(place_split[1], FLOAT) ||
 			!dushnila_defence(place_split[2], FLOAT))
 		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
+	ft_free_mat(place_split);
+	place_split = ft_split(rt->split[2], ',');
 	cam->ori.x = ft_atof(place_split[0]);
 	cam->ori.y = ft_atof(place_split[1]);
 	cam->ori.z = ft_atof(place_split[2]);
-	ft_free_mat(place_split);
 	if((cam->fov = ft_atof(rt->split[3]) * (3.14/180)) < 0)
 		error_parse(rt, "CAMERA INFO ERROR\n", cam, place_split);
+	ft_free_mat(place_split);
 	cam->id = rt->cam_count;
 	rt->cam_count += 1;
 	ft_lstadd_back(&rt->cmr_lst, ft_lstnew(cam));
@@ -325,6 +325,10 @@ int		parse_res(t_rt *rt)
 		return (0);
 	rt->res.x = ft_atoi(rt->split[1]);
 	rt->res.y = ft_atoi(rt->split[2]);
+	if (rt->res.x > 2560)
+		rt->res.x = 2560;
+	if (rt->res.y > 1440)
+		rt->res.y = 1440;
 	if (rt->res.x < 0 || rt->res.y < 0)
 		return (0);
 	rt->res.id = 1;
