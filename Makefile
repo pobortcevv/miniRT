@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/02/16 13:57:29 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/17 22:54:44 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS		= srcs/main.c \
 		  srcs/parser_checks.c \
 		  srcs/render.c \
 		  srcs/vector.c \
+		  srcs/vector2.c \
 		  srcs/colors.c \
 		  srcs/colors2.c \
 		  srcs/lists_utils.c \
@@ -48,13 +49,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)

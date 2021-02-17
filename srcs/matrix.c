@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/17 23:38:59 by sabra             #+#    #+#             */
+/*   Updated: 2021/02/17 23:41:13 by sabra            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
-float **ft_free_float_mat(float **m)
+float	**ft_free_float_mat(float **m)
 {
 	int i;
 
@@ -14,12 +26,12 @@ float **ft_free_float_mat(float **m)
 	return (m);
 }
 
-float **rotation_matrix(t_xyz ori)
+float	**rotation_matrix(t_xyz ori)
 {
-	float cos_x;
-	float cos_y;
-	int	 i;
-	float **m;
+	float	cos_x;
+	float	cos_y;
+	float	**m;
+	int		i;
 
 	i = 0;
 	if (ori.z < 0)

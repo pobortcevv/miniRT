@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:03:45 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 17:05:20 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/17 23:38:07 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_lgt	*ft_lstlgt(t_list *list, int index)
 {
-	int 	i;
-	t_list 	*lst;
-	t_lgt 	*lgt;
+	int	i;
+	t_list	*lst;
+	t_lgt	*lgt;
 
 	lst = list;
 	lgt = lst->content;
@@ -32,9 +32,9 @@ t_lgt	*ft_lstlgt(t_list *list, int index)
 
 t_elem	*ft_lstcnt(t_list *list, int index)
 {
-	int i;
-	t_list *lst;
-	t_elem *elem;
+	int	i;
+	t_list	*lst;
+	t_elem	*elem;
 
 	lst = list;
 	elem = lst->content;
@@ -48,12 +48,11 @@ t_elem	*ft_lstcnt(t_list *list, int index)
 	return (elem);
 }
 
-
 t_cam	*ft_lstcam(t_list *list, int index)
 {
-	int i;
-	t_list *lst;
-	t_cam *cam;
+	int	i;
+	t_list	*lst;
+	t_cam	*cam;
 
 	lst = list;
 	cam = lst->content;

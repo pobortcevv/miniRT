@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:17:38 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/16 16:38:35 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/17 23:09:27 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ int	main(int ac, char **av)
 {
 	t_rt	rt;
 
-	if (ft_check_file(av[1]) && (ac == 2 || (ac == 3 && ft_check_file(av[1]) && ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)))
+	if ((ac == 2 && ft_check_file(av[1])) 
+				|| ((ac == 3 && ft_check_file(av[1])
+				&& ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)))
 	{
 		ft_bzero(&rt, sizeof(t_rt));
-		if(!(rt.mlx = mlx_init()))
+		if (!(rt.mlx = mlx_init()))
 			error_exit(&rt, "MLX ERROR\n");
 		if ((rt.fd = open(av[1], O_RDONLY)) == -1)
 			error_exit(&rt, "OPEN FILE ERROR\n");
@@ -49,7 +51,8 @@ int	main(int ac, char **av)
 		if (ft_pars(&rt) != 1)
 			error_exit(&rt, "PARSER ERROR\n");
 		ft_putstr_fd("everything ok\n", 1);
-		if(ac == 3 && ft_check_file(av[1]) && ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
+		if (ac == 3 && ft_check_file(av[1])
+				&& ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
 			create_bmp(&rt);
 		close(rt.fd);
 		start_rt(&rt);

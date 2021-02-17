@@ -6,13 +6,13 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:22:24 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/11 14:18:19 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/17 22:40:30 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-float 	ft_dot(t_xyz *vec1, t_xyz *vec2)
+float	ft_dot(t_xyz *vec1, t_xyz *vec2)
 {
 	float result;
 
@@ -52,25 +52,5 @@ t_xyz	v_new(t_xyz v1, t_xyz v2)
 	v_res.x = v1.x - v2.x;
 	v_res.y = v1.y - v2.y;
 	v_res.z = v1.z - v2.z;
-	return (v_res);
-}
-
-t_xyz	v_multi(t_xyz v, float n)
-{
-	t_xyz	v_res;
-
-	v_res.x = v.x * n;
-	v_res.y = v.y * n;
-	v_res.z = v.z * n;
-	return (v_res);
-}
-
-t_xyz	v_plus(t_xyz v1, t_xyz v2)
-{
-	t_xyz	v_res;
-
-	v_res.x = v1.x + v2.x;
-	v_res.y = v1.y + v2.y;
-	v_res.z = v1.z + v2.z;
 	return (v_res);
 }

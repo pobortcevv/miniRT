@@ -6,23 +6,22 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 12:52:05 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/16 16:26:24 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/17 22:53:15 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void bmp_render(t_rt *rt, int fd)
+void		bmp_render(t_rt *rt, int fd)
 {
 	int		x;
-	int	 	y;
+	int		y;
 	t_color		color;
-	unsigned int res;
-	float	**rotation_m;
+	unsigned int	res;
+	float		**rotation_m;
 
 	y = rt->res.y;
 	rt->cam = *ft_lstcam(rt->cmr_lst, 0);
-	normalize(&rt->cam.ori);
 	rotation_m = rotation_matrix(rt->cam.ori);
 	cam_to_world(rt, rotation_m, &rt->cam);
 	while (y >= 0)
@@ -42,7 +41,7 @@ void bmp_render(t_rt *rt, int fd)
 	ft_free_float_mat(rotation_m);
 }
 
-static void make_header(t_rt *rt, unsigned char *header, size_t file_size)
+static void	make_header(t_rt *rt, unsigned char *header, size_t file_size)
 {
 	header[0] = (unsigned char)'B';
 	header[1] = (unsigned char)'M';
@@ -50,8 +49,8 @@ static void make_header(t_rt *rt, unsigned char *header, size_t file_size)
 	header[3] = (unsigned char)(file_size >> 8);
 	header[4] = (unsigned char)(file_size >> 16);
 	header[5] = (unsigned char)(file_size >> 24);
-	header[10] = (unsigned char)54; /* The number of bytes between start of the file (0) and the first byte of the pixel data.) */
-	header[14] = (unsigned char)40; /* Size of the header in bytes. It should be '40' in decimal to represent BITMAPINFOHEADER header type.'') */
+	header[10] = (unsigned char)54;
+	header[14] = (unsigned char)40;
 	header[18] = (unsigned char)rt->res.x;
 	header[19] = (unsigned char)(rt->res.x >> 8);
 	header[20] = (unsigned char)(rt->res.x >> 16);
@@ -76,6 +75,7 @@ int		create_bmp(t_rt *rt)
 		error_exit(rt, "OPEN FILE ERROR\n");
 	make_header(rt, header, file_size);
 	write(fd, header, 54);
+	normalize(&rt->cam.ori);
 	bmp_render(rt, fd);
 	close(fd);
 	exit(0);
