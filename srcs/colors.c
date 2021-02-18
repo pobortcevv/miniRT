@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 10:46:08 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/17 22:46:42 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 16:04:55 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	color_light(t_color *res, float light)
 	res->b *= light;
 }
 
-int	ft_color(int r, int g, int b)
+int		ft_color(int r, int g, int b)
 {
 	int	rgb;
 

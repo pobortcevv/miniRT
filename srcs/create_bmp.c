@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 12:52:05 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/17 22:53:15 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 15:34:03 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void		bmp_render(t_rt *rt, int fd)
 {
-	int		x;
-	int		y;
-	t_color		color;
+	int				x;
+	int				y;
+	t_color			color;
 	unsigned int	res;
-	float		**rotation_m;
+	float			**rotation_m;
 
 	y = rt->res.y;
 	rt->cam = *ft_lstcam(rt->cmr_lst, 0);
@@ -63,7 +63,7 @@ static void	make_header(t_rt *rt, unsigned char *header, size_t file_size)
 	header[28] = (unsigned char)24;
 }
 
-int		create_bmp(t_rt *rt)
+int			create_bmp(t_rt *rt)
 {
 	unsigned char	header[54];
 	size_t			file_size;

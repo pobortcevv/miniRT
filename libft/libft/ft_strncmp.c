@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 09:28:00 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/04 14:48:39 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 20:20:44 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_strncmp(char *s1, char *s2, unsigned int n)
 
 	i = 0;
 	if (ft_strlen(s1) > ft_strlen(s2))
-		return(1);
+		return (1);
 	else if (ft_strlen(s1) < ft_strlen(s2))
 		return (-1);
 	if (!n)

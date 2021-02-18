@@ -6,13 +6,13 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 10:47:54 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/05 14:55:00 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 16:08:18 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_color	c_multi_colors(t_color c1, t_color c2)
+t_color		cs_multi(t_color c1, t_color c2)
 {
 	t_color res;
 
@@ -25,19 +25,19 @@ t_color	c_multi_colors(t_color c1, t_color c2)
 	return (res);
 }
 
-int	c_isnull(t_color c)
+int			c_isnull(t_color c)
 {
 	return (c.r == 0 && c.g == 0 && c.b == 0);
 }
 
-void	color_ambiant(t_color *c, t_color light_color)
+void		color_ambiant(t_color *c, t_color light_color)
 {
 	c->r *= light_color.r / 255;
 	c->g *= light_color.g / 255;
 	c->b *= light_color.b / 255;
 }
 
-t_color	c_one(void)
+t_color		c_one(void)
 {
 	t_color res;
 

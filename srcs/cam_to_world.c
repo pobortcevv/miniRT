@@ -6,15 +6,15 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:34:32 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/17 23:32:53 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 15:23:26 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	change_frame(t_rt *rt, t_cam *cam)
+void		change_frame(t_rt *rt, t_cam *cam)
 {
-	int	i;
+	int		i;
 	t_elem	*curr_elem;
 	t_lgt	*curr_lgt;
 

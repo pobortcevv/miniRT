@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:03:22 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/17 22:56:36 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/18 17:04:12 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ void	error_exit(t_rt *rt, char *error_name)
 {
 	ft_printf("Error\n");
 	ft_putstr_fd(error_name, 2);
-	if (rt->closest_elem)
-		free(rt->closest_elem);
+	if (rt->cl_el)
+		free(rt->cl_el);
 	free_lists(rt);
 	if (rt->mlx_win)
 		mlx_destroy_window(rt->mlx, rt->mlx_win);
-	sleep(1000);
 	exit(EXIT_FAILURE);
 }
 
@@ -50,16 +49,15 @@ void	error_parse(t_rt *rt, char *error_name, void *elem, char **place_split)
 	free_lists(rt);
 	if (rt->mlx_win)
 		mlx_destroy_window(rt->mlx, rt->mlx_win);
-	sleep(1000);
 	exit(EXIT_FAILURE);
 }
 
-int		normal_exit(t_rt *rt)
+void	rt_null(t_rt *rt)
 {
+	rt->cam_count = 0;
+	rt->res.id = 0;
+	rt->amb.id = 0;
 	free_lists(rt);
-	mlx_destroy_window(rt->mlx, rt->mlx_win);
-	exit(EXIT_SUCCESS);
-	return (1);
 }
 
 int		key_use(int keycode, t_rt *rt)
@@ -71,10 +69,7 @@ int		key_use(int keycode, t_rt *rt)
 		if ((rt->fd = open(rt->file_name, O_RDONLY)) == -1)
 			error_exit(rt, "OPEN FILE ERROR\n");
 		cam_id = rt->cam.id + 1;
-		rt->cam_count = 0;
-		rt->res.id = 0;
-		rt->amb.id = 0;
-		free_lists(rt);
+		rt_null(rt);
 		ft_pars(rt);
 		if (cam_id < rt->cam_count)
 		{
