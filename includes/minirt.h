@@ -6,20 +6,21 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:10:56 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/18 19:50:04 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/20 10:50:50 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft/libft.h"
 # include "objects.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 
 typedef struct	s_rt
 {
@@ -71,7 +72,7 @@ int				ft_color(int r, int g, int b);
 void			color_light(t_color *res, float light);
 t_color			c_null(void);
 t_color			c_one(void);
-void			color_ambiant(t_color *c, t_color light_color);
+void			color_ambiant(t_color *c, t_color light_color, float ratio);
 t_color			c_plus(t_color c1, t_color c2);
 int				c_isnull(t_color c);
 t_color			cs_multi(t_color c1, t_color c2);

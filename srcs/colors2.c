@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 10:47:54 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/18 16:08:18 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/20 10:50:17 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int			c_isnull(t_color c)
 	return (c.r == 0 && c.g == 0 && c.b == 0);
 }
 
-void		color_ambiant(t_color *c, t_color light_color)
+void		color_ambiant(t_color *c, t_color light_color, float ratio)
 {
-	c->r *= light_color.r / 255;
-	c->g *= light_color.g / 255;
-	c->b *= light_color.b / 255;
+	c->r += (light_color.r / 255) * ratio;
+	c->g += (light_color.g / 255) * ratio;
+	c->b += (light_color.b / 255) * ratio;
 }
 
 t_color		c_one(void)

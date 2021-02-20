@@ -6,7 +6,7 @@
 /*   By: sabra <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:26:25 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/12 19:11:58 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/20 10:55:38 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ float	shadow_intersect(t_rt *rt, t_elem *cl_elem)
 	while (i < ft_lstsize(rt->ob_lst))
 	{
 		intersect_init(rt, ft_lstcnt(rt->ob_lst, i), cl_elem->p, cl_elem->l);
-		if (rt->t1 >= 0.0001 && rt->t1 < 1)
+		if (rt->t1 >= 0.001 && rt->t1 < 1)
 			closest_t = rt->t1;
-		if (rt->t2 >= 0.0001 && rt->t2 < 1)
+		if (rt->t2 >= 0.001 && rt->t2 < 1)
 			closest_t = rt->t2;
 		i++;
 	}

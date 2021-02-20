@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:48:14 by sabra             #+#    #+#             */
-/*   Updated: 2021/02/18 17:14:53 by sabra            ###   ########.fr       */
+/*   Updated: 2021/02/20 10:54:30 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,17 @@ float	extra_light(t_rt *rt, t_elem *cl_elem, float light, t_color *result)
 		if (cl_elem->r_dot_v > 0)
 			light += lgt->bright * powf(cl_elem->r_dot_v /
 					(v_len(cl_elem->v_r) * v_len(rt->cam.d)), BRIGHT_RATE);
-		color_ambiant(result, lgt->color);
+		color_ambiant(result, lgt->color, light);
 	}
 	return (light);
 }
 
 t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 {
-	int		i;
 	float	light;
 	t_color	result;
 
 	light = 0;
-	i = 0;
 	cl_elem->p = v_plus(rt->cam.pos, v_multi(rt->cam.d, t));
 	if (cl_elem->id == SPHERE)
 		cl_elem->norm = v_new(cl_elem->p, cl_elem->pos);
@@ -54,10 +52,9 @@ t_color	comp_light(t_rt *rt, t_elem *cl_elem, float t)
 		cl_elem->norm = cl_elem->ori;
 	normalize(&cl_elem->norm);
 	light += rt->amb.ratio;
-	result = c_one();
-	color_ambiant(&result, rt->amb.color);
+	result = c_null();
+	color_ambiant(&result, rt->amb.color, light);
 	light = extra_light(rt, cl_elem, light, &result);
-	color_light(&result, light);
 	return (result);
 }
 
