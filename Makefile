@@ -6,7 +6,7 @@
 #    By: sabra <sabra@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/29 17:35:52 by sabra             #+#    #+#              #
-#    Updated: 2021/02/19 10:10:34 by sabra            ###   ########.fr        #
+#    Updated: 2021/02/25 16:10:03 by sabra            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,13 +56,13 @@ all:
 
 $(NAME):	$(OBJS)
 	make bonus -j4 -C ./libft/libft
-	$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
-	#$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
+	#$(CC) $(OBJS) $(LIBS) -o $(NAME) # Linux
+	$(CC) $(OBJS) $(LIBS_MAC) -o $(NAME)	# macOS
 	echo miniRT compiled!
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
-	@#$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
+	@#$(CC) $(CFLAGS) -I/usr/include -Iminlibx-linux -O3 -c $< -o $@ # Linux
+	@$(CC) $(CFLAGS)  -Imlx -c $< -o $@	# macOS
 
 clean:
 			$(RM) $(OBJS)
